@@ -16,10 +16,10 @@ router.post("/create-checkout-session", async (req, res) => {
           name: product.name,
           images: [product.image],
           metadata: {
-            sellerId: product.sellerId 
+            sellerId: JSON.stringify(product.sellerId)
           }
         },
-        unit_amount: Math.round(product.price * 100),
+        unit_amount:  Math.max(Math.round(product.price * 100), 5000),
       },
       quantity: product.quantity,
     }));
