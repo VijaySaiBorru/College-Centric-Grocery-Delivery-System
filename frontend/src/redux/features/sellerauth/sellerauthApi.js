@@ -1,13 +1,13 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react"
 import { getBaseUrl } from "../../../utils/baseURL"
 
-const authApi = createApi({
+const sellerauthApi = createApi({
     reducerPath:'authApi',
     baseQuery:fetchBaseQuery({
-        baseUrl:`${getBaseUrl()}/api/auth/user`,
+        baseUrl:`${getBaseUrl()}/api/auth/seller`,
         credentials:'include',
     }),
-    tagTypes:["User"],
+    tagTypes:["Seller"],
     endpoints:(builder)=>({
         registerUser:builder.mutation({
             query:(newUser)=>({
@@ -31,18 +31,18 @@ const authApi = createApi({
         }),
         getUser:builder.query({
             query:()=>({
-                url:"/users",
+                url:"/sellers",
                 method:"GET",
             }),
             refetchOnMount:true,
-            invalidatesTags:["Users"],
+            invalidatesTags:["Sellers"],
         }),
         deleteUser:builder.mutation({
             query:(userId)=>({
-                url:`/users/${userId}`,
+                url:`/sellers/${userId}`,
                 method:"DELETE",
             }),
-            invalidatesTags:["Users"],
+            invalidatesTags:["Sellers"],
         }),
         editProfile:builder.mutation({
             query:(profileData)=>({
@@ -53,5 +53,5 @@ const authApi = createApi({
         }),
     })
 })
-export const {useRegisterUserMutation,useLoginUserMutation,useLogoutUserMutation,useDeleteUserMutation,useEditProfileMutation,useGetUserQuery}=authApi;
-export default authApi;
+export const {useRegisterUserMutation,useLoginUserMutation,useLogoutUserMutation,useDeleteUserMutation,useEditProfileMutation,useGetUserQuery}=sellerauthApi;
+export default sellerauthApi;
