@@ -41,8 +41,7 @@ router.post("/login",async(req,res)=>{
             role:user.role,
             profileImage:user.profileImage,
             bio:user.bio,
-            profession:user.profession,
-            team:user.team
+            address:user.address
         }})
     }
     catch(error){
@@ -117,8 +116,7 @@ router.patch("/edit-profile",async(req,res)=>{
         if(username !== undefined) user.username=username;
         if(profileImage !== undefined) user.profileImage=profileImage;
         if(bio !== undefined) user.bio=bio;
-        if(profession !== undefined) user.profession=profession;
-        if(team !== undefined) user.team=team;
+        if(address !== undefined) user.address=address;
         await user.save();
         res.status(200).send({message:"User Profile updated Successfully",user:{
             _id:user._id,
@@ -127,8 +125,7 @@ router.patch("/edit-profile",async(req,res)=>{
             role:user.role,
             profileImage:user.profileImage,
             bio:user.bio,
-            profession:user.profession,
-            team:user.team
+            address:user.address
         }})
     }
     catch(error){
