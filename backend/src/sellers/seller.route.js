@@ -35,12 +35,14 @@ router.post("/login",async(req,res)=>{
             sameSite:'None'
         })
         res.status(200).send({message:"Logged in successfully!",token,seller:{
-            _id:user._id,
-            email:user.email,
-            username:user.username,
-            profileImage:user.profileImage,
-            bio:user.bio,
-            address:user.address
+            _id:seller._id,
+            email:seller.email,
+            username:seller.username,
+            profileImage:seller.profileImage,
+            bio:seller.bio,
+            address:seller.address,
+            timings:seller.timings,
+            contact:seller.contact,
         }})
     }
     catch(error){
