@@ -44,6 +44,7 @@ const SingleProduct = () => {
                     <p className=' text-gray-400 mb-4'>{singleProduct?.description}</p>
                     <div className='flex flex-col space-y-2'>
                         <p><strong>Category : </strong>{singleProduct?.category}</p>
+                        <p><strong>Seller :</strong>{singleProduct.seller}</p>
                         <div className='flex gap-1 items-center'>
                         <strong>Rating:</strong>
                          <RatingStars rating={singleProduct?.rating}/>

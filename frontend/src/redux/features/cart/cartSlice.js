@@ -18,7 +18,7 @@ const cartSlice = createSlice({
             );
       
             if (!isExist) {
-              state.products.push({ ...action.payload, quantity: 1 });
+              state.products.push({ ...action.payload, quantity: 1,sellerId: action.payload.sellerId });
             } else {
               console.log("Items already added");
             }

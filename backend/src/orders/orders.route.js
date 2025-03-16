@@ -14,12 +14,12 @@ router.post("/create-checkout-session", async (req, res) => {
         currency: "inr",
         product_data: {
           name: product.name,
-          images: [product.image],
+          images: product.image ? [product.image] : [], // Ensure array format
           metadata: {
-            sellerId: JSON.stringify(product.sellerId)
-          }
+            sellerId: String(product.sellerId), // Store seller ID as string
+          },
         },
-        unit_amount:  Math.max(Math.round(product.price * 100), 5000),
+        unit_amount: Math.round(product.price * 100), // Convert ₹ to paise
       },
       quantity: product.quantity,
     }));
@@ -39,11 +39,11 @@ router.post("/create-checkout-session", async (req, res) => {
   }
 });
 
+
 //  confirm payment
 
 router.post("/confirm-payment", async (req, res) => {
   const { session_id } = req.body;
-  // console.log(session_id);
 
   try {
     const session = await stripe.checkout.sessions.retrieve(session_id, {
@@ -56,7 +56,8 @@ router.post("/confirm-payment", async (req, res) => {
 
     if (!order) {
       const lineItems = session.line_items.data.map((item) => ({
-        productId: item.price.product,
+        productId: item.price_data.product_data.metadata.productId, // Retrieve original product ID
+        sellerId: item.price_data.product_data.metadata.sellerId, // Retrieve seller ID
         quantity: item.quantity,
       }));
 
@@ -70,14 +71,13 @@ router.post("/confirm-payment", async (req, res) => {
         status:
           session.payment_intent.status === "succeeded" ? "pending" : "failed",
       });
+
+      await order.save(); // Ensure new order is saved
     } else {
       order.status =
         session.payment_intent.status === "succeeded" ? "pending" : "failed";
+      await order.save(); // Update existing order
     }
-
-    // Save the order to MongoDB
-    await order.save();
-    //   console.log('Order saved to MongoDB', order);
 
     res.json({ order });
   } catch (error) {
