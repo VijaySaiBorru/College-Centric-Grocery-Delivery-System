@@ -28,7 +28,7 @@ catch(error){
 
 router.get("/",async(req,res)=>{
 try{
-    const {category,color,minPrice,maxPrice,page=1,limit=10}=req.query;
+    const {category,minPrice,maxPrice,page=1,limit=10}=req.query;
     let filter={};
     if(category && category!=='all'){
         filter.category=category;
