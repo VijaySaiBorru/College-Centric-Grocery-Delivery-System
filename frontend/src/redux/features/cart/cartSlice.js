@@ -18,7 +18,7 @@ const cartSlice = createSlice({
             );
       
             if (!isExist) {
-              state.products.push({ ...action.payload, quantity: 1,sellerId: action.payload.sellerId });
+              state.products.push({ ...action.payload, quantity: 1 });
             } else {
               console.log("Items already added");
             }
@@ -30,7 +30,7 @@ const cartSlice = createSlice({
           },
         updateQuantity:(state,action)=>{
             state.products=state.products.map((product)=>{
-                if(product.id === action.payload.id){
+                if(product._id === action.payload.id){
                     if(action.payload.type === 'increment'){
                         product.quantity +=1;
                     }else if(action.payload.type === 'decrement'){
