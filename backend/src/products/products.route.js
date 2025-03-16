@@ -4,12 +4,33 @@ const Products = require('./products.model');
 const Reviews = require('../reviews/reviews.model');
 const verifyToken = require('../middleware/verifyToken');
 const verifyAdmin = require('../middleware/verifyAdmin');
-
+const Seller=require('../sellers/seller.model');
 router.post("/create-product",async(req,res)=>{
+    temp={...req.body};
 try{
+   
+    const seller_id=req.body.sellerId;
+    try{
+        const seller=await Seller.findById(seller_id);
+        if (seller)
+        {
+            temp.seller=seller.username;
+        }
+        else
+        {console.log(err,"no proper seller for this product");
+            res.status(500).send({message:"failed to create new Product"});
+
+        }
+    }
+    catch(err)
+    {
+        console.log(err,"no proper seller for this product");
+        res.status(500).send({message:"failed to create new Product"});
+    }
     const newProduct = new Products({
-    ...req.body
-    })
+        ...temp
+        })
+
     const savedProduct = await newProduct.save();
     const reviews = await Reviews.find({productId: savedProduct._id});
     if(reviews.length>0){

@@ -9,6 +9,7 @@ const productSchema = new mongoose.Schema({
     image: String,
     rating: { type: Number, default: 0 },
     sellerId: { type: mongoose.Types.ObjectId, ref: "Seller", required: true },
+    seller:{type:String,required:true,default:"seller"},
     quantity: { type: Number, default:0}
 }, { timestamps: true });
 
