@@ -21,6 +21,7 @@ const OrderSummary = () => {
         const headers = {
             "Content-Type" : "application/json"
         }
+        console.log("",stripe,body)
         const response = await fetch(`${getBaseUrl()}/api/orders/create-checkout-session`,{
             method:"POST",
             headers:headers,
