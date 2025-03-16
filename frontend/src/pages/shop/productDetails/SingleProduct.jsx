@@ -38,13 +38,12 @@ const SingleProduct = () => {
                 <div className='md:w-1/2 w-full'>
                     <h3 className='text-2xl font-semibold mb-4'>{singleProduct?.name}</h3>
                     <p className='text-xl text-primary mb-4 space-x-1'>
-                        ${singleProduct?.price}
-                        {singleProduct?.oldPrice && <s className='ml-1'>${singleProduct?.oldPrice}</s>}
+                     ₹{singleProduct?.price}
+                        {singleProduct?.oldPrice && <s className='ml-1'>₹{singleProduct?.oldPrice}</s>}
                         </p>
                     <p className=' text-gray-400 mb-4'>{singleProduct?.description}</p>
                     <div className='flex flex-col space-y-2'>
                         <p><strong>Category : </strong>{singleProduct?.category}</p>
-                        <p><strong>Color :</strong>{ singleProduct?.color}</p>
                         <div className='flex gap-1 items-center'>
                         <strong>Rating:</strong>
                          <RatingStars rating={singleProduct?.rating}/>
