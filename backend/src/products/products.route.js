@@ -49,7 +49,7 @@ try{
     const products = await Products.find(filter)
                                 .skip(skip)
                                 .limit(parseInt(limit))
-                                .populate(({ path: "author", select: "email" }))
+                                .populate(({ path: "sellerId", select: "email" }))
                                 .sort({createdAt:-1});
     res.status(200).send({products,totalPages,totalProducts});                            
 }
@@ -77,7 +77,7 @@ router.post('/search', async (req, res) => {
     const products = await Products.find(filter)
         .skip(skip)
         .limit(parseInt(limit))
-        .populate({ path: 'author', select: 'email' })
+        .populate({ path: 'sellerId', select: 'email' })
         .sort({ createdAt: -1 });
 
     res.status(200).send({ products, totalPages, totalProducts });
@@ -89,7 +89,7 @@ router.get('/trending', async (req, res) => {
     const products = await Products.find()
         .skip(skip)
         .limit(parseInt(limit))
-        .populate({ path: 'author', select: 'email' })
+        .populate({ path: 'sellerId', select: 'email' })
         .sort({ createdAt: -1 })
         .exec();
 
@@ -103,7 +103,7 @@ router.get('/categories/:categoryName', async (req, res) => {
 
     try {
         const products = await Products.find({ category: categoryName })
-            .populate({ path: 'author', select: 'email' })
+            .populate({ path: 'sellerId', select: 'email' })
             .sort({ createdAt: -1 })
             .exec();
 
@@ -112,27 +112,11 @@ router.get('/categories/:categoryName', async (req, res) => {
         res.status(500).send({ message: 'Error fetching products by category', error });
     }
 });
-router.get('/teams/:teamName', async (req, res) => {
-    const { teamName } = req.params;
-
-    try {
-        const products = await Products.find({ team: teamName })  
-            .populate({ path: 'author', select: 'email' })  
-            .sort({ createdAt: -1 })  
-            .exec();
-
-        res.status(200).send({ products });
-    } catch (error) {
-        res.status(500).send({ message: 'Error fetching products by team', error });
-    }
-});
-
-
 
 router.get("/:id",async(req,res)=>{
 try{
     const productId=req.params.id;
-    const product = await Products.findById(productId).populate(({ path: "author", select: "email username" }));
+    const product = await Products.findById(productId).populate(({ path: "sellerId", select: "email username" }));
     if(!product){
         res.status(404).send({message:"Product not found"}); 
     }
