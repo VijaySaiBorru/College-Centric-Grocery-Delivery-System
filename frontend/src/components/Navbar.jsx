@@ -52,7 +52,7 @@ const Navbar = () => {
             <li className='link'><Link to="/pages">Pages</Link></li>
             <li className='link'><Link to="/contact">Contact</Link></li>
         </ul>
-        <div className='nav__logo'><Link to ="/">E-Commerce<span>.</span></Link></div>
+        <div className='nav__logo'><Link to ="/">College Centric Grocery Delivery System <span>.</span></Link></div>
         <div className='nav__icons relative'>
             <span>
                 <Link to="/search">
