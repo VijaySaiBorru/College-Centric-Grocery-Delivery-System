@@ -22,7 +22,7 @@ const Login = () => {
             const {token,user} =response;
             dispatch(setUser({user}));
             alert("Login Successful");
-            navigate(`/teams/${user.team}`);
+            navigate(`/`);
         } catch (error) {
             setMessage("Please provide a valid email and password")
         }

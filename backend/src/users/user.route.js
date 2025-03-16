@@ -1,7 +1,7 @@
 const express=require('express');
 const router=express.Router();
 const User = require('../users/user.model');
-const generateToken = require('../middleware/generateToken');
+const generateToken = require('../middleware/generateToken').generateToken;
 const verifyToken = require('../middleware/verifyToken');
 
 router.post("/register",async(req,res)=>{

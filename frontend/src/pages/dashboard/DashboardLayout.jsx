@@ -13,10 +13,10 @@ const DashboardLayout = () => {
         switch(user?.role){
             case 'admin':
                 return <AdminDashboard />;
-            case 'user':
-                return <UserDashboard />;
             default:
-                return <Navigate to="/login" replace />
+                return <UserDashboard />;
+            // default:
+            //     return <Navigate to="/login" replace />
         }
     }
   return (
