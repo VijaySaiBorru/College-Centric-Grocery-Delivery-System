@@ -33,9 +33,6 @@ try{
     if(category && category!=='all'){
         filter.category=category;
     }
-    if(color && color!=='all'){
-        filter.color=color;
-    }
     if(minPrice && maxPrice){
         const min=parseFloat(minPrice);
         const max=parseFloat(maxPrice);
