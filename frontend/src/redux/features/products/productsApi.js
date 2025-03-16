@@ -77,7 +77,7 @@ const productsApi = createApi({
                 }).toString();
         
                 return {
-                    url: `/teams/${teamName}?${queryParams}`,  // Endpoint for team products
+                    url: `/categories/${teamName}?${queryParams}`,  // Endpoint for team products
                     method: 'GET',  // Use GET method
                 };
             },
