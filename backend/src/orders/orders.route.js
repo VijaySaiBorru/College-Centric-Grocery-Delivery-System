@@ -20,7 +20,7 @@ router.post("/create-checkout-session", async (req, res) => {
             sellerId: String(product.userId), // Store seller ID as string
           },
         },
-        unit_amount: Math.round(product.price * 100), // Convert ₹ to paise
+        unit_amount: Math.max(Math.round(product.price * 100), 5000), // Convert ₹ to paise
       },
       quantity: product.quantity,
     }));
