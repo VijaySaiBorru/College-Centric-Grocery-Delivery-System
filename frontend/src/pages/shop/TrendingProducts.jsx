@@ -38,7 +38,7 @@ const TrendingProducts = () => {
         <section className="section__container product__container">
             <h2 className="section__header">Trending Products</h2>
             <p className='section__subheader mb-12'>
-                Discover the Hottest Picks: Elevate Your Style with Our Curated Collection of Trending Women's Fashion Products.
+            "Discover the Freshest Picks: Elevate Your Lifestyle with Our Curated Collection of Daily Groceries & Essentials!"
             </p>
             <div className="mt-12">
                 <ProductCards products={data?.products} />
