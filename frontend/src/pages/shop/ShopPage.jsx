@@ -5,13 +5,13 @@ import ShopFiltering from "./ShopFiltering";
 import { useFetchAllProductsQuery } from "../../redux/features/products/productsApi";
 
 const filters={
-    categories: ['all' , 'T-shirts', 'Caps', 'Mugs' , 'Logos'],
+    categories: ['all' , 'clothing', 'bakery', 'chips' , 'electronics','fruits','groceries','soft_drinks','stationary','vegetables','medicine'],
     colors: ['all','black','red','gold','blue','silver','beige'  ,'green'],
     priceRanges:[
-        {label:'Under $50',min:0 , max:50},
-        {label:'$50 - $100',min:50 , max:100},
-        {label:'$100 - $200',min:100 , max:200},
-        {label:'$20 and above',min:200 , max:Infinity},
+        {label:'Under ₹50',min:0 , max:50},
+        {label:'₹50 - ₹100',min:50 , max:100},
+        {label:'₹100 - ₹200',min:100 , max:200},
+        {label:'₹200 and above',min:200 , max:Infinity},
     ]
 };
 
@@ -79,8 +79,7 @@ const ShopPage = () => {
     <>
         <section className='section__container bg-primary-light'>
             <h2 className='section__header capitalize'>Shop Page</h2>
-            <p className='section__subheader'>Discover the Hottest Picks: Elevate Your Style 
-                with Our Curated Collection of Trending Women's Fashion Products!
+            <p className='section__subheader'>Freshness Delivered: Shop the Best Groceries & Daily Essentials for College Life!
             </p>
         </section>
         <section className='section__container'>
