@@ -1,40 +1,40 @@
 const express=require('express');
 const router=express.Router();
-const User = require('../users/user.model');
 const generateToken = require('../middleware/generateToken');
 const verifyToken = require('../middleware/verifyToken');
+const Seller = require('./seller.model');
 
 router.post("/register",async(req,res)=>{
     try{
         const {username,email,password}=req.body;
-        const user = new User({email,username,password});
-        await user.save();
-        res.status(201).send({message:"User registered successfully!"})
+        const seller = new Seller({email,username,password});
+        await seller.save();
+        res.status(201).send({message:"Seller registered successfully!"})
     }
     catch(error){
-        console.log("Error registering user",error);
-        res.status(500).send({message:"Error registering user",})
+        console.log("Error registering seller",error);
+        res.status(500).send({message:"Error registering seller",})
     }
 })
 
 router.post("/login",async(req,res)=>{
     try{
         const {email,password}=req.body;
-        const user = await User.findOne({email});
-        if(!user){
-            res.status(400).send({message:"User not found"})
+        const seller = await Seller.findOne({email});
+        if(!seller){
+            res.status(400).send({message:"Seller not found"})
         }
-        const isMatch = await user.comparePassword(password);
+        const isMatch = await seller.comparePassword(password);
         if(!isMatch){
             res.status(400).send({message:"Password not match"})
         }
-        const token = await generateToken(user._id);
+        const token = await generateToken(seller._id);
         res.cookie('token',token,{
             httpOnly:true,
             secure:true,
             sameSite:'None'
         })
-        res.status(200).send({message:"Logged in successfully!",token,user:{
+        res.status(200).send({message:"Logged in successfully!",token,seller:{
             _id:user._id,
             email:user.email,
             username:user.username,
@@ -44,8 +44,8 @@ router.post("/login",async(req,res)=>{
         }})
     }
     catch(error){
-        console.log("Error Logging in user",error);
-        res.status(500).send({message:"Error in Login user",})
+        console.log("Error Logging in seller",error);
+        res.status(500).send({message:"Error in Login seller",})
     }
 })
 
@@ -55,8 +55,8 @@ router.post("/logout",async(req,res)=>{
        res.status(200).send({message:"Logged out Successfully",})
     }
     catch(error){
-        console.log("Error Logging out user",error);
-        res.status(500).send({message:"Error in Logout user",})
+        console.log("Error Logging out seller",error);
+        res.status(500).send({message:"Error in Logout seller",})
     }
 })
 

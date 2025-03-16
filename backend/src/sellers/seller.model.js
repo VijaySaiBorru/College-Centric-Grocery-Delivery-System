@@ -1,29 +1,30 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
-const userSchema = new Schema({
+const sellerSchema = new Schema({
     username: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     profileImage: String,
     bio: { type: String, maxlength: 200 },
+    timings:{type:String },
     address:String,
+    contact:String,
     createdAt: { type: Date, default: Date.now },
 });
 
-// Pre-save middleware to hash the password 
-userSchema.pre('save', async function (next) {
-    const user = this;
-    if (!user.isModified('password')) return next();
-    const hashedPassword = await bcrypt.hash(user.password, 10);
-    user.password = hashedPassword;
+sellerSchema.pre('save', async function (next) {
+    const seller = this;
+    if (!seller.isModified('password')) return next();
+    const hashedPassword = await bcrypt.hash(seller.password, 10);
+    seller.password = hashedPassword;
     next();
 });
 
 // Method to compare passwords
-userSchema.methods.comparePassword = async function (candidatePassword) {
+sellerSchema.methods.comparePassword = async function (candidatePassword) {
     return await bcrypt.compare(candidatePassword, this.password);
 };
 
-const User = model('User', userSchema);
-module.exports = User;
+const Seller = model('Seller', sellerSchema);
+module.exports = Seller;
