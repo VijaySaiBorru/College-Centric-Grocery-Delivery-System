@@ -18,7 +18,7 @@ const cartSlice = createSlice({
             );
       
             if (!isExist) {
-              state.products.push({ ...action.payload, quantity: 1,sellerId: action.payload.sellerId });
+              state.products.push({ ...action.payload, quantity: 1 });
               
               Swal.fire({
                 position:"top-end",

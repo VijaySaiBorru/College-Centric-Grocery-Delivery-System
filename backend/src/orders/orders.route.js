@@ -6,25 +6,21 @@ const router = express.Router();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 // create checkout session
 router.post("/create-checkout-session", async (req, res) => {
-  console.log("Received request body:", req.body);
   const { products } = req.body;
 
   try {
     const lineItems = products.map((product) => ({
       price_data: {
-        currency: "inr",
+        currency: "usd",
         product_data: {
           name: product.name,
-          images: product.image ? [product.image] : [], // Ensure array format
-          metadata: {
-            sellerId: String(product.userId), // Store seller ID as string
-          },
+          images: [product.image],
         },
-        unit_amount: Math.max(Math.round(product.price * 100), 5000), // Convert ₹ to paise
+        unit_amount: Math.round(product.price * 100),
       },
       quantity: product.quantity,
     }));
-    console.log("", lineItems);
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items: lineItems,
@@ -40,39 +36,26 @@ router.post("/create-checkout-session", async (req, res) => {
   }
 });
 
-
 //  confirm payment
 
 router.post("/confirm-payment", async (req, res) => {
   const { session_id } = req.body;
-  console.log("🔍 Received session_id:", session_id);
+  // console.log(session_id);
 
   try {
     const session = await stripe.checkout.sessions.retrieve(session_id, {
       expand: ["line_items", "payment_intent"],
     });
 
-    console.log("🛒 Stripe session response:", session); // Debugging log
-
-    if (!session.line_items || !session.line_items.data) {
-      throw new Error("Missing line items in session response");
-    }
-
-    console.log("🛒 Line items data:", session.line_items.data);
-
-    const paymentIntentId = session.payment_intent?.id || "N/A";
-    console.log("💳 Payment Intent ID:", paymentIntentId);
+    const paymentIntentId = session.payment_intent.id;
 
     let order = await Order.findOne({ orderId: paymentIntentId });
 
     if (!order) {
-      const lineItems = session.line_items.data.map((item) => {
-        console.log("📦 Processing item:", item); // Debugging log
-        return {
-          productId: item.price?.product || "Unknown Product",
-          quantity: item.quantity || 1,
-        };
-      });
+      const lineItems = session.line_items.data.map((item) => ({
+        productId: item.price.product,
+        quantity: item.quantity,
+      }));
 
       const amount = session.amount_total / 100;
 
@@ -80,21 +63,22 @@ router.post("/confirm-payment", async (req, res) => {
         orderId: paymentIntentId,
         products: lineItems,
         amount: amount,
-        email: session.customer_details?.email || "unknown",
+        email: session.customer_details.email,
         status:
-          session.payment_intent?.status === "succeeded" ? "pending" : "failed",
+          session.payment_intent.status === "succeeded" ? "pending" : "failed",
       });
     } else {
       order.status =
-        session.payment_intent?.status === "succeeded" ? "pending" : "failed";
+        session.payment_intent.status === "succeeded" ? "pending" : "failed";
     }
 
+    // Save the order to MongoDB
     await order.save();
-    console.log("✅ Order saved successfully:", order);
+    //   console.log('Order saved to MongoDB', order);
 
     res.json({ order });
   } catch (error) {
-    console.error("❌ Error confirming payment:", error);
+    console.error("Error confirming payment:", error);
     res.status(500).json({ error: "Failed to confirm payment" });
   }
 });
