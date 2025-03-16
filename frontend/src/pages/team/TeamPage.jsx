@@ -24,7 +24,7 @@ const TeamPage = () => {
       <section className='section__container bg-primary-light'>
         <h2 className='section__header capitalize'>{teamName}</h2>
         <p className='section__subheader'>
-          Explore exclusive products related to {teamName} and show your team spirit!
+          Explore exclusive products related to {teamName}!
         </p>
       </section>
       
