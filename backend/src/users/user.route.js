@@ -104,7 +104,7 @@ router.get("/users",async(req,res)=>{
 
 router.patch("/edit-profile",async(req,res)=>{
     try{
-        const {userId,username,profileImage,bio,profession,team}=req.body;
+        const {userId,username,profileImage,bio,address}=req.body;
         if(!userId){
             return res.status(400).send({message:'User ID is required'})
            }
@@ -127,8 +127,8 @@ router.patch("/edit-profile",async(req,res)=>{
         }})
     }
     catch(error){
-        console.log("Error updating user role",error);
-        res.status(500).send({message:"Error updating user role",})
+        console.log("Error updating user details",error);
+        res.status(500).send({message:"Error updating user details",})
     }
 })
 

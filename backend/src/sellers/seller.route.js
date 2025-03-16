@@ -17,39 +17,54 @@ router.post("/register",async(req,res)=>{
     }
 })
 
-router.post("/login",async(req,res)=>{
-    try{
-        const {email,password}=req.body;
-        const seller = await Seller.findOne({email});
-        if(!seller){
-            res.status(400).send({message:"Seller not found"})
+router.post("/login", async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        // Find seller by email
+        const seller = await Seller.findOne({ email });
+        if (!seller) {
+            return res.status(400).json({ message: "Seller not found" });
         }
+
+        // Check if password matches
         const isMatch = await seller.comparePassword(password);
-        if(!isMatch){
-            res.status(400).send({message:"Password not match"})
+        if (!isMatch) {
+            return res.status(400).json({ message: "Incorrect password" });
         }
-        const token = await generateToken(seller._id);
-        res.cookie('token',token,{
-            httpOnly:true,
-            secure:true,
-            sameSite:'None'
-        })
-        res.status(200).send({message:"Logged in successfully!",token,seller:{
-            _id:seller._id,
-            email:seller.email,
-            username:seller.username,
-            profileImage:seller.profileImage,
-            bio:seller.bio,
-            address:seller.address,
-            timings:seller.timings,
-            contact:seller.contact,
-        }})
+
+        // Generate token only if seller is found
+        const token = generateToken(seller._id);
+
+        // Set HTTP-only secure cookie
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "None",
+        });
+
+        // Send response with seller details
+        res.status(200).json({
+            message: "Logged in successfully!",
+            token,
+            seller: {
+                _id: seller._id,
+                email: seller.email,
+                username: seller.username,
+                profileImage: seller.profileImage,
+                bio: seller.bio,
+                address: seller.address,
+                timings: seller.timings,
+                contact: seller.contact,
+            },
+        });
+    } catch (error) {
+        console.error("Error Logging in seller:", error);
+        res.status(500).json({ message: "Error logging in seller" });
     }
-    catch(error){
-        console.log("Error Logging in seller",error);
-        res.status(500).send({message:"Error in Login seller",})
-    }
-})
+});
+
+
 
 router.post("/logout",async(req,res)=>{
     try{
