@@ -43,9 +43,9 @@ const OrderSummary = () => {
             Order Summary
         </h2>
         <p className='text-text-dark mt-2'>Selected Items: {selectedItems}</p>
-        <p>Total Price: ${totalPrice.toFixed(2)}</p>
-        <p>Tax({taxRate*100}%): ${tax.toFixed(2)}</p>
-        <h3 className='font-bold'>GrandTotal: ${grandTotal.toFixed(2)}</h3>
+        <p>Total Price: ₹{totalPrice.toFixed(2)}</p>
+        <p>Tax({taxRate*100}%): ₹{tax.toFixed(2)}</p>
+        <h3 className='font-bold'>GrandTotal: ₹{grandTotal.toFixed(2)}</h3>
         <div className='px-6 mb-6'>
             <button 
             onClick={(e)=>{
