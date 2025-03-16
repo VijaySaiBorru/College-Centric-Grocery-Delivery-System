@@ -43,7 +43,7 @@ const CartModal = ({products,isOpen,onClose}) => {
                                                     <img src={item.image} alt="" className='size-12 object-cover mr-4'/>
                                                     <div>
                                                         <h5 className='text-lg font-medium'>{item.name}</h5>
-                                                        <p className='text-gray-600 text-sm'>${Number(item.price).toFixed(2)}</p>
+                                                        <p className='text-gray-600 text-sm'>₹{Number(item.price).toFixed(2)}</p>
                                                     </div>
                                                     <div className='flex flex-row md:justify-start justify-end items-center mt-2'>
                                                         <button 
