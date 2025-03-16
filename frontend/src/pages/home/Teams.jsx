@@ -20,7 +20,7 @@ const Teams = () => {
     { name: 'Groceries', path: 'groceries', image: groceries },
     { name: 'Soft Drinks and Juices', path: 'soft_drinks', image: soft_drinks },
     { name: 'Stationary', path: 'stationary', image: stationary },
-    { name: 'Vegeetables', path: 'vegetables', image: vegetables },
+    { name: 'Vegetables', path: 'vegetables', image: vegetables },
     { name: 'Medicine', path: 'medicine', image: medicine },
   ];
 
