@@ -36,4 +36,4 @@ const generatesellerToken= async(userId)=>{
     }
 }
 
-module.exports = generateToken;
+module.exports ={ generateToken,generatesellerToken};

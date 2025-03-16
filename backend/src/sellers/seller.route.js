@@ -1,6 +1,6 @@
 const express=require('express');
 const router=express.Router();
-const generateToken = require('../middleware/generateToken');
+const generatesellerToken = require('../middleware/generateToken').generatesellerToken;
 const verifyToken = require('../middleware/verifyToken');
 const Seller = require('./seller.model');
 
@@ -34,7 +34,7 @@ router.post("/login", async (req, res) => {
         }
 
         // Generate token only if seller is found
-        const token = generatesellerToken(seller._id);
+        const token = await generatesellerToken(seller._id);
 
         // Set HTTP-only secure cookie
         res.cookie("token", token, {
@@ -46,7 +46,7 @@ router.post("/login", async (req, res) => {
         // Send response with seller details
         res.status(200).json({
             message: "Logged in successfully!",
-            token,
+            token:token,
             seller: {
                 _id: seller._id,
                 email: seller.email,

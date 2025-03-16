@@ -129,7 +129,7 @@ catch(error){
 }
 })
 
-router.patch("/update-product/:id",verifyToken,verifyAdmin,async(req,res)=>{
+router.patch("/update-product/:id",verifyToken,async(req,res)=>{
 try{
     const productId=req.params.id;
     const updatedProduct = await Products.findByIdAndUpdate(productId,{...req.body},{new:true});
