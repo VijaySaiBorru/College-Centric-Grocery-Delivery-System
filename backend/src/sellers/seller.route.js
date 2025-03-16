@@ -65,26 +65,26 @@ router.post("/logout",async(req,res)=>{
 router.delete("/users/:id",async(req,res)=>{
     try{
        const {id}=req.params;
-       const user = await User.findByIdAndDelete(id);
-       if(!user){
-        return res.status(404).send({message:'User not found'})
+       const seller = await Seller.findByIdAndDelete(id);
+       if(!seller){
+        return res.status(404).send({message:'Seller not found'})
        }
-       res.status(200).send({message:"User deleted Successfully",})
+       res.status(200).send({message:"Seller deleted Successfully",})
     }
     catch(error){
-        console.log("Error Deleting user",error);
-        res.status(500).send({message:"Error Deleting user",})
+        console.log("Error Deleting seller",error);
+        res.status(500).send({message:"Error Deleting seller",})
     }
 })
 
 router.get("/users",async(req,res)=>{
     try{
-       const users = await User.find({},'id email role').sort({createdAt:-1});
-       res.status(200).send(users)
+       const sellers = await Seller.find({},'id email role').sort({createdAt:-1});
+       res.status(200).send(sellers)
     }
     catch(error){
-        console.log("Error fetching users",error);
-        res.status(500).send({message:"Error fetching user",})
+        console.log("Error fetching sellers",error);
+        res.status(500).send({message:"Error fetching sellers",})
     }
 })
 
@@ -110,27 +110,27 @@ router.patch("/edit-profile",async(req,res)=>{
         if(!userId){
             return res.status(400).send({message:'User ID is required'})
            }
-        const user = await User.findById(userId);
-        if(!user){
-         return res.status(404).send({message:'User not found'})
+        const seller = await Seller.findById(userId);
+        if(!seller){
+         return res.status(404).send({message:'Seller not found'})
         }
-        if(username !== undefined) user.username=username;
-        if(profileImage !== undefined) user.profileImage=profileImage;
-        if(bio !== undefined) user.bio=bio;
-        if(address !== undefined) user.address=address;
-        await user.save();
-        res.status(200).send({message:"User Profile updated Successfully",user:{
-            _id:user._id,
-            email:user.email,
-            username:user.username,
-            profileImage:user.profileImage,
-            bio:user.bio,
-            address:user.address
+        if(username !== undefined) seller.username=username;
+        if(profileImage !== undefined) seller.profileImage=profileImage;
+        if(bio !== undefined) seller.bio=bio;
+        if(address !== undefined) seller.address=address;
+        await seller.save();
+        res.status(200).send({message:"Seller Profile updated Successfully",seller:{
+            _id:seller._id,
+            email:seller.email,
+            username:seller.username,
+            profileImage:seller.profileImage,
+            bio:seller.bio,
+            address:seller.address
         }})
     }
     catch(error){
-        console.log("Error updating user role",error);
-        res.status(500).send({message:"Error updating user role",})
+        console.log("Error updating seller details",error);
+        res.status(500).send({message:"Error updating seller details",})
     }
 })
 
