@@ -62,7 +62,7 @@ router.post("/logout",async(req,res)=>{
     }
 })
 
-router.delete("/users/:id",async(req,res)=>{
+router.delete("/sellers/:id",async(req,res)=>{
     try{
        const {id}=req.params;
        const seller = await Seller.findByIdAndDelete(id);
@@ -77,7 +77,7 @@ router.delete("/users/:id",async(req,res)=>{
     }
 })
 
-router.get("/users",async(req,res)=>{
+router.get("/sellers",async(req,res)=>{
     try{
        const sellers = await Seller.find({},'id email role').sort({createdAt:-1});
        res.status(200).send(sellers)
