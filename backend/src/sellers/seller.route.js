@@ -106,7 +106,7 @@ router.get("/users",async(req,res)=>{
 
 router.patch("/edit-profile",async(req,res)=>{
     try{
-        const {userId,username,profileImage,bio,profession,team}=req.body;
+        const {userId,username,profileImage,bio,address,timings,contact}=req.body;
         if(!userId){
             return res.status(400).send({message:'User ID is required'})
            }
@@ -118,6 +118,8 @@ router.patch("/edit-profile",async(req,res)=>{
         if(profileImage !== undefined) seller.profileImage=profileImage;
         if(bio !== undefined) seller.bio=bio;
         if(address !== undefined) seller.address=address;
+        if(timings !== undefined) seller.timings=timings;
+        if(contact !== undefined) seller.contact=contact;
         await seller.save();
         res.status(200).send({message:"Seller Profile updated Successfully",seller:{
             _id:seller._id,
@@ -125,7 +127,9 @@ router.patch("/edit-profile",async(req,res)=>{
             username:seller.username,
             profileImage:seller.profileImage,
             bio:seller.bio,
-            address:seller.address
+            address:seller.address,
+            timings:seller.timings,
+            contact:seller.contact,
         }})
     }
     catch(error){
