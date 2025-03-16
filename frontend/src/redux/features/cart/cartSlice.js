@@ -28,6 +28,15 @@ const cartSlice = createSlice({
             });
             } else {
               console.log("Items already added");
+                Swal.fire({
+                    title:"Product Already Added to the Cart",
+                    text:"You won't be able to revert this!",
+                    icon:"warning",
+                    showCancelButton:true,
+                    confirmButtonColor:"#3085d6",
+                    cancelButtonColor:"#d33",
+                    confirmButtonText:"Ok!"
+                })
             }
       
             state.selectedItems = setSelectedItems(state);
