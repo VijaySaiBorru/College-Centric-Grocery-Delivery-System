@@ -1,6 +1,6 @@
 
 import { Link } from 'react-router-dom'
-import bannerImg from "../../assets/ipl-store.webp"
+import bannerImg from "../../assets/banner.png"
 const Banner = () => {
   return (
     <div  className='section__container header__container'>
