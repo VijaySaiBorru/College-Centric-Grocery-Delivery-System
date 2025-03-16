@@ -19,6 +19,7 @@ const cartSlice = createSlice({
       
             if (!isExist) {
               state.products.push({ ...action.payload, quantity: 1,sellerId: action.payload.sellerId });
+              
               Swal.fire({
                 position:"top-end",
                 icon:"success",
