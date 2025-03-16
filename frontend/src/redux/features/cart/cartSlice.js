@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-
+import Swal from "sweetalert2";
 const initialState = {
     products:[],
     selectedItems:0,
@@ -18,7 +18,14 @@ const cartSlice = createSlice({
             );
       
             if (!isExist) {
-              state.products.push({ ...action.payload, quantity: 1 });
+              state.products.push({ ...action.payload, quantity: 1,sellerId: action.payload.sellerId });
+              Swal.fire({
+                position:"top-end",
+                icon:"success",
+                title:"Product Added to Cart",
+                showConfirmButton:false,
+                timer:1500
+            });
             } else {
               console.log("Items already added");
             }
