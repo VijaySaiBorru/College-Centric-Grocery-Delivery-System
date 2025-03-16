@@ -7,7 +7,7 @@ const Banner = () => {
       <div className='header__content z-30'>
         <h4 className='uppercase'>UP TO 20% Discount on</h4>
         <h1>IPL Merchandise & Accessories</h1>
-        <p>Gear up for TATA IPL 2025 with our exclusive collection of IPL-themed accessories, including jerseys, caps, and more! Show your team spirit in style.</p>
+        <p>From snacks to stationary, we've got everything you need to fuel your brain and your day! Grab your essentials and show off your campus spirit with our exclusive college gear. Shop now and make every day on campus unforgettable!</p>
         <button className='btn'><Link to='/shop'>EXPLORE NOW</Link></button>
       </div>
       <div className='header__image'><img src={bannerImg} alt="banner Img" /></div>
