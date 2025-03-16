@@ -6,6 +6,7 @@ const verifyToken=(req,res,next)=>{
     try{
         const token=req.cookies.token;
         //const token=req.headers["authorization"].split(" ")[1];
+        console.log("Hello",token);
         if(!token){
             return res.status(401).send({message:'Invalid token'})
         }
@@ -16,7 +17,8 @@ const verifyToken=(req,res,next)=>{
         req.userId=decoded.userId;
         req.role=decoded.role;
         next();
-    }catch(error){
+    }
+    catch(error){
         console.log('Error while verifying token',error);
         return res.status(401).send({message:'Error while verifying token'})
     }

@@ -34,7 +34,7 @@ router.post("/login", async (req, res) => {
         }
 
         // Generate token only if seller is found
-        const token = generateToken(seller._id);
+        const token = generatesellerToken(seller._id);
 
         // Set HTTP-only secure cookie
         res.cookie("token", token, {
