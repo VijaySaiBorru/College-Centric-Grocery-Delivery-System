@@ -13,6 +13,7 @@ const SingleProduct = () => {
     const productReviews = data?.reviews || [];
 
     const handleAddToCart = (product) =>{
+        
         dispatch(addToCart(product));
     }
 
@@ -50,11 +51,11 @@ const SingleProduct = () => {
                          <RatingStars rating={singleProduct?.rating}/>
                         </div>
                     </div>
-                    <button onClick={(e)=>{
+                   {(singleProduct.quantity>=0)?( <button onClick={(e)=>{
                         e.stopPropagation();
                         handleAddToCart(singleProduct)}} className='mt-6 px-6 py-3 bg-primary text-white rounded-md'>
                         Add to Cart
-                    </button>
+                    </button>):(<p className='text-red'> stock unavailable! </p>)}
                 </div>
             </div>
         </section>
