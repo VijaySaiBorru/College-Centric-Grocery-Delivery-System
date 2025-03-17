@@ -131,17 +131,18 @@ router.get('/categories/:categoryName', async (req, res) => {
     }
 });
 
-router.get('/seller/:sellerID', async (req, res) => {
-    const { sellerID,page,limit } = req.params;
+router.get('/seller', async (req, res) => {
+    const { sellerId,page,limit } = req.query;
+    console.log(sellerId,page,limit);
     try {
         // const products = await Products.find({ sellerId: sellerID })
         //     .populate({ path: 'sellerId', select: 'email' })
         //     .sort({ createdAt: -1 })
         //     .exec();
         const skip=(parseInt(page)-1)*parseInt(limit);
-        const totalProducts = await Products.countDocuments({ sellerId: sellerID });
+        const totalProducts = await Products.countDocuments({ sellerId: sellerId });
         const totalPages = Math.ceil(totalProducts/parseInt(limit));
-        const products = await Products.find({ sellerId: sellerID })
+        const products = await Products.find({ sellerId: sellerId })
                                     .skip(skip)
                                     .limit(parseInt(limit))
                                     .populate(({ path: "sellerId", select: "email" }))
