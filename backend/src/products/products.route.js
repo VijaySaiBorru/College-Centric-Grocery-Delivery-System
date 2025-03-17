@@ -131,7 +131,7 @@ router.get('/categories/:categoryName', async (req, res) => {
     }
 });
 
-router.get('/seller', async (req, res) => {
+router.get('/seller/:sellerId', async (req, res) => {
     const { sellerId,page,limit } = req.query;
     console.log(sellerId,page,limit);
     try {
