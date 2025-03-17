@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import { formatDate } from '../../../../utils/formateDate';
 import { Link } from 'react-router-dom';
 import UpdateOrderModal from './UpdateOrderModal';
-import { useDeleteOrderMutation, useGetAllOrdersQuery } from '../../../../redux/features/orders/orderApi';
+import { useDeleteOrderMutation, useGetOrdersBysellerIdQuery } from '../../../../redux/features/orders/orderApi';
+import { useSelector } from 'react-redux';
 
 
 const ManageOrders = () => {
-    const { data: orders, error, isLoading, refetch } = useGetAllOrdersQuery();
+    const { seller } = useSelector((state) => state.sellerauth.seller);
+    const { data: orders, error, isLoading, refetch } = useGetOrdersBysellerIdQuery(seller?._id);
     const [selectedOrder, setSelectedOrder] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [deleteOrder] = useDeleteOrderMutation();

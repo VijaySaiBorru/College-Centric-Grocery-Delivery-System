@@ -23,6 +23,13 @@ export const orderApi = createApi({
             }),
             providesTags:['Order']
         }),
+        getOrdersBysellerId:builder.query({
+            query:(sellerId)=>({
+                url:`/seller/${sellerId}`,
+                method:'GET'
+            }),
+            providesTags:['Order']
+        }),
         getAllOrders: builder.query({
             query: () => (
                 {
@@ -50,6 +57,6 @@ export const orderApi = createApi({
     })
 });
 
-export const {useDeleteOrderMutation,useGetAllOrdersQuery,useGetOrdersByEmailQuery,useGetOrdersByIdQuery,useUpdateOrderStatusMutation}=orderApi;
+export const {useDeleteOrderMutation,useGetAllOrdersQuery,useGetOrdersByEmailQuery,useGetOrdersByIdQuery,useUpdateOrderStatusMutation,useGetOrdersBysellerIdQuery}=orderApi;
 
 export default orderApi;
