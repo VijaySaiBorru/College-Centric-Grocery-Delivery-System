@@ -10,6 +10,7 @@ const sellerSchema = new Schema({
     timings:{type:String },
     address:String,
     contact:String,
+    role:{type:String,required:true,default:"seller"},
     createdAt: { type: Date, default: Date.now },
 });
 

@@ -40,7 +40,8 @@ router.post("/login",async(req,res)=>{
             username:user.username,
             profileImage:user.profileImage,
             bio:user.bio,
-            address:user.address
+            address:user.address,
+            role:user.role
         }})
     }
     catch(error){
@@ -123,7 +124,8 @@ router.patch("/edit-profile",async(req,res)=>{
             username:user.username,
             profileImage:user.profileImage,
             bio:user.bio,
-            address:user.address
+            address:user.address,
+            role:user.role
         }})
     }
     catch(error){

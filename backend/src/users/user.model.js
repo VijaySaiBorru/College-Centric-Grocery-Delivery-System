@@ -9,6 +9,7 @@ const userSchema = new Schema({
     bio: { type: String, maxlength: 200 },
     address:String,
     createdAt: { type: Date, default: Date.now },
+    role:{type:String,required:true,default:"buyer"},
 });
 
 // Pre-save middleware to hash the password 

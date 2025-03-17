@@ -56,6 +56,7 @@ router.post("/login", async (req, res) => {
                 address: seller.address,
                 timings: seller.timings,
                 contact: seller.contact,
+                role:seller.role
             },
         });
     } catch (error) {
@@ -145,6 +146,7 @@ router.patch("/edit-profile",async(req,res)=>{
             address:seller.address,
             timings:seller.timings,
             contact:seller.contact,
+            role:seller.role
         }})
     }
     catch(error){
