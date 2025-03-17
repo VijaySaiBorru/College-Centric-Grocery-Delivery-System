@@ -40,8 +40,7 @@ const Search = () => {
       <section className="section__container bg-primary-light">
         <h2 className="section__header capitalize">Search Products</h2>
         <p className="section__subheader">
-          Browse a diverse range of categories, from chic dresses to versatile accessories.
-          Elevate your style today!
+        Browse a diverse range of essentials, from fresh produce to convenient snacks. Stock up on all your student grocery needs today!
         </p>
       </section>
 
