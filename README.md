@@ -26,24 +26,26 @@ Ensure you have the following installed:
 - npm or yarn
 
 ### Steps
-1. Clone the repository:
+1. Clone the repository for both frontend and backend:
    ```sh
    git clone  https://github.com/VijaySaiBorru/College-Centric-Grocery-Delivery-System.git
    cd https://github.com/VijaySaiBorru/College-Centric-Grocery-Delivery-System
    ```
-2. Install dependencies:
+2. Install dependencies for both frontend and backend:
    ```sh
    npm install
    ```
-3. Start the development server:
+3. Start the development server for frontend:
    ```sh
+   cd frontend
    npm run dev
    ```
    The application will be available at `http://localhost:5173`.
+4. Start the development server for backend:
+   ```sh
+   cd backend
+   npm run start:dev
+   ```
+   The application will be available at `http://localhost:5000`.
 
-## Building for Production
-To create a production-ready build:
-```sh
-npm run build
-```
-The built files will be available in the `dist` directory.
+
