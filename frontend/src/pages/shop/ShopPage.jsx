@@ -7,7 +7,7 @@ import {useGetSellerQuery} from "../../redux/features/sellerauth/sellerauthApi"
 
 const filters={
     categories: ['all' , 'clothing', 'bakery', 'chips' , 'electronics','fruits','groceries','soft_drinks','stationary','vegetables','medicine'],
-    sellers: [],
+    colors:["black","blue"],
     priceRanges:[
         {label:'Under ₹50',min:0 , max:50},
         {label:'₹50 - ₹100',min:50 , max:100},
@@ -22,14 +22,16 @@ const ShopPage = () => {
     
     console.log(data);
     useEffect(()=>{ 
-        if(data){data.map((item) => {
+        if(data)
+            {data.map((item) => {
         // Correct way to update the state with the username
         setSellers((prevState) => [...prevState, item.username]);
        
-      });
-      } filters.sellers=sellers;
+      });console.log("at line sellers",sellers);
+      }
      },[data])
-  
+     
+     console.log("at line sellers",sellers);
 
     const [filterState, setFilterState]=useState({
         category:'all',
@@ -49,7 +51,7 @@ const ShopPage = () => {
         page:currentPage,
         limit:ProductsPerPage,
     });
-    console.log(products)
+   // console.log(products)
 
     /* without using backend products
      const [products,setProducts]=useState(productsData);
