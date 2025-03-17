@@ -56,14 +56,14 @@ const productsApi = createApi({
           
          
         fetchCategoryProducts: builder.query({
-            query: ({ categoryName, page = 1, limit = 8 }) => {
+            query: ({ teamName, page = 1, limit = 8 }) => {
                 const queryParams = new URLSearchParams({
                     page: page.toString(),
                     limit: limit.toString(),
                 }).toString();
         
                 return {
-                    url: `/categories/${categoryName}?${queryParams}`,  // Endpoint for category products
+                    url: `/categories/${teamName}?${queryParams}`,  // Endpoint for category products
                     method: 'GET',  // Use GET method
                 };
             },

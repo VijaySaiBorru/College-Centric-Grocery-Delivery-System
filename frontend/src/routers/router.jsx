@@ -25,6 +25,8 @@ import ManageUser from "../pages/dashboard/admin/users/ManageUser";
 import ManageOrders from "../pages/dashboard/admin/manageOrders/ManageOrders";
 import TeamPage from "../pages/team/TeamPage";
 import AdminProfile from "../pages/dashboard/admin/profile/adminProfile";
+import Sellers from "../pages/sellers/Sellers";
+import SellerPage from "../pages/sellers/SellerPage";
 
 const router = createBrowserRouter([
     {
@@ -36,6 +38,8 @@ const router = createBrowserRouter([
             {path:"/teams/:teamName", element: <TeamPage/>},
             {path:"/search", element: <Search/>},
             {path:"/shop", element: <ShopPage/>},
+            {path:"/sellers", element: <Sellers />},
+            {path:"/seller/:sellerId", element: <SellerPage/>},
             {path:"/contact", element: <ContactPage/>},
             {path:"/shop/:id", element: <SingleProduct/>},
             {path:"/success" , element: <PaymentSuccess />},

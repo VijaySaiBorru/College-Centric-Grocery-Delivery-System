@@ -20,21 +20,6 @@ const ShopFiltering = ({filters,filterState,setFilterState,clearFilters}) => {
             }
         </div>
         <div className='flex flex-col space-y-2'>
-            <h4 className='font-medium text-lg'>Color</h4>
-            <hr />
-            {
-                filters.colors.map((color)=>(
-                    <label key={color} className='capitalize cursor-pointer'>
-                        <input type="radio" name="color" id="color" value={color}
-                        checked={filterState.color === color}
-                        onChange={(e)=>setFilterState({...filterState,color:e.target.value})}
-                        />
-                        <span className='ml-1'>{color}</span>
-                    </label>
-                ))
-            }
-        </div>
-        <div className='flex flex-col space-y-2'>
             <h4 className='font-medium text-lg'>Price Range</h4>
             <hr />
             {

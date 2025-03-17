@@ -118,7 +118,6 @@ router.get('/trending', async (req, res) => {
 
 router.get('/categories/:categoryName', async (req, res) => {
     const { categoryName } = req.params;
-
     try {
         const products = await Products.find({ category: categoryName })
             .populate({ path: 'sellerId', select: 'email' })
@@ -133,7 +132,6 @@ router.get('/categories/:categoryName', async (req, res) => {
 
 router.get('/seller/:sellerId', async (req, res) => {
     const { sellerId,page,limit } = req.query;
-    console.log(sellerId,page,limit);
     try {
         // const products = await Products.find({ sellerId: sellerID })
         //     .populate({ path: 'sellerId', select: 'email' })

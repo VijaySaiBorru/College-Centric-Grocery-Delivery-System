@@ -7,7 +7,6 @@ import {useGetSellerQuery} from "../../redux/features/sellerauth/sellerauthApi"
 
 const filters={
     categories: ['all' , 'clothing', 'bakery', 'chips' , 'electronics','fruits','groceries','soft_drinks','stationary','vegetables','medicine'],
-    colors:["black","blue"],
     priceRanges:[
         {label:'Under ₹50',min:0 , max:50},
         {label:'₹50 - ₹100',min:50 , max:100},
@@ -19,19 +18,17 @@ const filters={
 const ShopPage = () => {
     const [sellers, setSellers] = useState([]);
     let { data } = useGetSellerQuery();
-    
-    console.log(data);
-    useEffect(()=>{ 
-        if(data)
-            {data.map((item) => {
-        // Correct way to update the state with the username
-        setSellers((prevState) => [...prevState, item.username]);
-       
-      });console.log("at line sellers",sellers);
-      }
-     },[data])
-     
-     console.log("at line sellers",sellers);
+    useEffect(() => { 
+        if (data) {
+            // Extract usernames and IDs properly
+            const sellerList = data.map(item => ({
+                id: item._id,
+                username: item.username
+            }));
+            // Set state once
+            setSellers(sellerList);
+        }
+    }, [data]);
 
     const [filterState, setFilterState]=useState({
         category:'all',
@@ -41,11 +38,10 @@ const ShopPage = () => {
    
     const [currentPage,setCurrentPage]=useState(1);
     const [ProductsPerPage]=useState(8);
-    const {category,color,priceRange} = filterState;
+    const {category,priceRange} = filterState;
     const [minPrice,maxPrice]=priceRange?priceRange.split('-').map(Number):[0,Infinity];
     const {data:{products=[],totalPages,totalProducts}={},error,isLoading}=useFetchAllProductsQuery({
         category:category !== 'all' ? category : '',
-        color:color !== 'all' ? color : '',
         minPrice:!isNaN(minPrice)?minPrice:'',
         maxPrice:!isNaN(maxPrice)?maxPrice:'',
         page:currentPage,
@@ -75,7 +71,6 @@ const ShopPage = () => {
     const clearFilters=()=>{
         setFilterState({
             category:'all',
-            color:'all',
             priceRange:''
         })
     }

@@ -49,7 +49,7 @@ const Navbar = () => {
         <ul className='nav__links'>
             <li className='link'><Link to="/">Home</Link></li>
             <li className='link'><Link to="/shop">Shop</Link></li>
-            <li className='link'><Link to="/pages">Pages</Link></li>
+            <li className='link'><Link to="/sellers">Sellers</Link></li>
             <li className='link'><Link to="/contact">Contact</Link></li>
         </ul>
         <div className='nav__logo'><Link to ="/">College Centric Grocery Delivery System <span>.</span></Link></div>
