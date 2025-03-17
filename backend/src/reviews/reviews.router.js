@@ -61,13 +61,13 @@ router.get("/:userId",async(req,res)=>{
     try{
        const reviews = await Reviews.find({userId:userId}).sort({createdAt:-1});
        if(reviews.length === 0){
-        res.status(200).send({message:"No reviews found",reviews});
+        return res.status(200).send({message:"No reviews found",reviews});
        }
-       res.status(200).send(reviews);
+       return res.status(200).send(reviews);
     }
     catch(error){
         console.error("Error fetching reviews by user",error);
-        res.status(500).send({message:"Failed to fetch reviews by user",})
+        return res.status(500).send({message:"Failed to fetch reviews by user",})
     }
 });
 
