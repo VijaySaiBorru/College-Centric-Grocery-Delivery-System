@@ -3,10 +3,11 @@ import productsData from "../../data/products.json"
 import ProductCards from "./ProductCards";
 import ShopFiltering from "./ShopFiltering";
 import { useFetchAllProductsQuery } from "../../redux/features/products/productsApi";
+import {useGetSellerQuery} from "../../redux/features/sellerauth/sellerauthApi"
 
 const filters={
     categories: ['all' , 'clothing', 'bakery', 'chips' , 'electronics','fruits','groceries','soft_drinks','stationary','vegetables','medicine'],
-    colors: ['all','black','red','gold','blue','silver','beige'  ,'green'],
+    sellers: [],
     priceRanges:[
         {label:'Under ₹50',min:0 , max:50},
         {label:'₹50 - ₹100',min:50 , max:100},
@@ -16,11 +17,25 @@ const filters={
 };
 
 const ShopPage = () => {
+    const [sellers, setSellers] = useState([]);
+    let { data } = useGetSellerQuery();
+    
+    console.log(data);
+    useEffect(()=>{ 
+        if(data){data.map((item) => {
+        // Correct way to update the state with the username
+        setSellers((prevState) => [...prevState, item.username]);
+        filters.sellers=sellers;
+      });
+      } },[data])
+  
+
     const [filterState, setFilterState]=useState({
         category:'all',
         color:'all',
         priceRange:''
     });
+   
     const [currentPage,setCurrentPage]=useState(1);
     const [ProductsPerPage]=useState(8);
     const {category,color,priceRange} = filterState;

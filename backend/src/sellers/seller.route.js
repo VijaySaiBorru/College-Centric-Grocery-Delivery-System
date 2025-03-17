@@ -95,7 +95,7 @@ router.delete("/sellers/:id",async(req,res)=>{
 
 router.get("/sellers",async(req,res)=>{
     try{
-       const sellers = await Seller.find({},'id email role').sort({createdAt:-1});
+       const sellers = await Seller.find({},'id email role username').sort({createdAt:-1});
        res.status(200).send(sellers)
     }
     catch(error){
