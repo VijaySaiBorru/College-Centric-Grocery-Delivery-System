@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
-import { useDeleteProductMutation, useFetchAllProductsQuery } from '../../../../redux/features/products/productsApi'
+import { useDeleteProductMutation, useFetchSellerProductsQuery } from '../../../../redux/features/products/productsApi'
 import { formatDate } from '../../../../utils/formateDate';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const ManageProduct = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [productsPerPage] = useState(12)
-    const { data: { products = [], totalPages, totalProducts } = {}, isLoading, error, refetch } = useFetchAllProductsQuery({
-        category: '',
-        color: '',
-        minPrice: '',
-        maxPrice: Infinity,
+    const {seller} =useSelector(state=>state.sellerauth.seller);
+    const { data: { products = [], totalPages, totalProducts } = {}, isLoading, error, refetch } = useFetchSellerProductsQuery({
+        sellerId:seller._id,
         page: currentPage,
         limit: productsPerPage,
     })

@@ -321,7 +321,7 @@ nav {
 .deals__image img {
   position: absolute;
   left: 50%;
-  bottom: -9rem;
+  bottom: -6rem;
   transform: translateX(-50%);
   max-width: 550px;
   background-color: transparent;
