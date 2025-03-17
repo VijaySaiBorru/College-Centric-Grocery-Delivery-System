@@ -60,9 +60,9 @@ router.get("/:userId",async(req,res)=>{
     }
     try{
        const reviews = await Reviews.find({userId:userId}).sort({createdAt:-1});
-       if(reviews.length === 0){
-        return res.status(200).send({message:"No reviews found",reviews});
-       }
+    //    if(reviews.length === 0){
+    //     return res.status(200).send({message:"No reviews found",reviews});
+    //    }
        return res.status(200).send(reviews);
     }
     catch(error){
