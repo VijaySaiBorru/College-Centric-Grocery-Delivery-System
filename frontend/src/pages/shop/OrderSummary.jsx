@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { clearCart } from '../../redux/features/cart/cartSlice';
 import {loadStripe} from '@stripe/stripe-js';
 import { getBaseUrl } from '../../utils/baseURL';
-
+import { useNavigate } from 'react-router-dom';
 const OrderSummary = () => {
     const products=useSelector((store)=>store.cart.products);
     const { selectedItems,totalPrice,tax,taxRate,grandTotal} = useSelector((store)=>store.cart);
@@ -12,7 +12,13 @@ const OrderSummary = () => {
         dispatch(clearCart());
     }
     const {user}=useSelector(state=>state.auth);
+    const navigate=useNavigate();
     const makePayment = async(e)=>{
+        if (!user)
+        {
+            alert("u should login before checkout");
+            navigate('/login');
+        }
         const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PK);
         const body = {
             products:products,
