@@ -28,7 +28,7 @@ Ensure you have the following installed:
 ### Steps
 1. Clone the repository:
    ```sh
-  git clone  https://github.com/VijaySaiBorru/College-Centric-Grocery-Delivery-System.git
+   git clone  https://github.com/VijaySaiBorru/College-Centric-Grocery-Delivery-System.git
    cd https://github.com/VijaySaiBorru/College-Centric-Grocery-Delivery-System
    ```
 2. Install dependencies:
