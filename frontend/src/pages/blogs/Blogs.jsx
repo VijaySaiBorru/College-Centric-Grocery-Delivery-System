@@ -17,7 +17,6 @@ const Blogs = () => {
         {blogsData.map((blog, index) => (
           <a
             key={index}
-            href={blog.link}
             target="_blank" // Opens the link in a new tab
             rel="noopener noreferrer" // For security purposes when opening in a new tab
             className="blog__card cursor-pointer hover:scale-105 transition-all duration-300"
