@@ -6,12 +6,15 @@ import AdminDashboard from './AdminDashboard';
 
 const DashboardLayout = () => {
     const {user}=useSelector((state)=>state.auth);
-    if(!user){
+    const {seller}=useSelector((state)=>state.sellerauth);
+    if(!user && !seller){
         return <Navigate to="/login" replace />
     }
+    var role= user?"user" : "seller";
+    console.log("", role)
     const renderDashboard=()=>{
-        switch(user?.role){
-            case 'admin':
+        switch(role){
+            case 'seller':
                 return <AdminDashboard />;
             default:
                 return <UserDashboard />;

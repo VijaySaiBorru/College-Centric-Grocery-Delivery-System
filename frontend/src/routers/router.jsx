@@ -59,12 +59,12 @@ const router = createBrowserRouter([
             { path: 'profile', element: <UserProfile /> },
             { path: 'reviews', element: <UserReviews /> },
 
-            { path: 'admin', element: <PrivateRoute role="admin"><AdminDMain/></PrivateRoute> },
-            { path: 'add-new-product', element: <PrivateRoute role="admin"><AddProduct /></PrivateRoute> },
-            { path: 'manage-products', element: <PrivateRoute role="admin"><ManageProduct /></PrivateRoute> },
-            { path: 'update-product/:id', element: <PrivateRoute role="admin"><UpdateProduct /></PrivateRoute> },
-            { path: 'users', element: <PrivateRoute role="admin"><ManageUser /></PrivateRoute> },
-            { path: 'manage-orders', element: <PrivateRoute role="admin"><ManageOrders/></PrivateRoute> },
+            { path: 'admin', element: <PrivateRoute role="seller"><AdminDMain/></PrivateRoute> },
+            { path: 'add-new-product', element: <PrivateRoute role="seller"><AddProduct /></PrivateRoute> },
+            { path: 'manage-products', element: <PrivateRoute role="seller"><ManageProduct /></PrivateRoute> },
+            { path: 'update-product/:id', element: <PrivateRoute role="seller"><UpdateProduct /></PrivateRoute> },
+            { path: 'users', element: <PrivateRoute role="seller"><ManageUser /></PrivateRoute> },
+            { path: 'manage-orders', element: <PrivateRoute role="seller"><ManageOrders/></PrivateRoute> },
         ]
     }
 ]);

@@ -30,8 +30,8 @@ const AdminDashboard = () => {
     <div className='space-y-5 bg-white p-8 md:h-screen flex flex-col justify-between'>
     <div>
         <div className='nav__logo'>
-        <Link to="/">E-Commerce<span>.</span></Link>
-        <p className='text-xs italic'>Admin dashboard</p>
+        <Link to="/dashboard">Grocery Store<span>.</span></Link>
+        <p className='text-xs italic'>Seller dashboard</p>
         </div>
         <hr className='mt-5' />
         <ul className='space-y-5 pt-5'>
@@ -55,6 +55,7 @@ const AdminDashboard = () => {
         >Logout</button>
     </div>
 </div>
+
   )
 }
 
