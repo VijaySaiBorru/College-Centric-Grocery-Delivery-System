@@ -25,9 +25,10 @@ const ShopPage = () => {
         if(data){data.map((item) => {
         // Correct way to update the state with the username
         setSellers((prevState) => [...prevState, item.username]);
-        filters.sellers=sellers;
+       
       });
-      } },[data])
+      } filters.sellers=sellers;
+     },[data])
   
 
     const [filterState, setFilterState]=useState({
