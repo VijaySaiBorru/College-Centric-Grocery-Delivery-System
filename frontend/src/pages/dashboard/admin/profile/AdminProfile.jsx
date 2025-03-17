@@ -57,9 +57,9 @@ const AdminProfile = () => {
         try {
             const response = await editProfile(updatedUser).unwrap();
             //console.log(response)
-            dispatch(setSeller(response.seller));
+            dispatch(setSeller(response));
            // console.log(seller);
-            localStorage.setItem('seller', JSON.stringify(response.seller))
+            localStorage.setItem('seller', JSON.stringify(response))
             alert('Profile updated successfully!');
             navigate('/dashboard/adminprofile')
             
