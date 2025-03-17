@@ -61,7 +61,7 @@ const AdminProfile = () => {
            // console.log(seller);
             localStorage.setItem('seller', JSON.stringify(response.seller))
             alert('Profile updated successfully!');
-            navigate('/dashboard/admin')
+            navigate('/dashboard/adminprofile')
             
         } catch (error) {
           console.error("Failed to update profile", error)  ;
