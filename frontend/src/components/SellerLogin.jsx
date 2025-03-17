@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { useLoginUserMutation } from '../redux/features/sellerauth/sellerauthApi';
-import { setUser } from '../redux/features/sellerauth/sellerauthSlice';
+import { useLoginSellerMutation } from '../redux/features/sellerauth/sellerauthApi';
+import { setSeller } from '../redux/features/sellerauth/sellerauthSlice';
 
 const SellerLogin = () => {
     const [message,setMessage]=useState('');
@@ -10,7 +10,7 @@ const SellerLogin = () => {
     const [password,setPassword]=useState('');
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [loginUser,{isLoading: loginLoading}]= useLoginUserMutation();
+    const [loginSeller,{isLoading: loginLoading}]= useLoginSellerMutation();
     const handleLogin=async(e)=>{
         e.preventDefault();
         const data={
@@ -18,10 +18,12 @@ const SellerLogin = () => {
             password,
         }
         try {
-            const response = await loginUser(data).unwrap();
-            const {token,user} =response;
-            dispatch(setUser({user}));
-            alert("Login Successful");
+            
+            const response = await loginSeller(data).unwrap();
+            console.log(response)
+            const {token,seller} =response;
+            dispatch(setSeller({seller}));
+            alert("Seller Login Successful");
             navigate(`/`);
         } catch (error) {
             setMessage("Please provide a valid email and password")

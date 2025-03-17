@@ -1,57 +1,66 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react"
-import { getBaseUrl } from "../../../utils/baseURL"
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { getBaseUrl } from "../../../utils/baseURL";
 
 const sellerauthApi = createApi({
-    reducerPath:'authApi',
-    baseQuery:fetchBaseQuery({
-        baseUrl:`${getBaseUrl()}/api/auth/seller`,
-        credentials:'include',
+    reducerPath: "sellerauthApi", // FIXED: Unique reducer path
+    baseQuery: fetchBaseQuery({
+        baseUrl: `${getBaseUrl()}/api/auth/seller`,
+        credentials: "include",
     }),
-    tagTypes:["Seller"],
-    endpoints:(builder)=>({
-        registerUser:builder.mutation({
-            query:(newUser)=>({
-                url:"/register",
-                method:"POST",
-                body:newUser
-            })
-        }),
-        loginUser:builder.mutation({
-            query:(credentials)=>({
-                url:"/login",
-                method:"POST",
-                body:credentials
-            })
-        }),
-        logoutUser:builder.mutation({
-            query:()=>({
-                url:"/logout",
-                method:"POST",
-            })
-        }),
-        getUser:builder.query({
-            query:()=>({
-                url:"/sellers",
-                method:"GET",
+    tagTypes: ["Seller"], // FIXED: Keep consistent casing
+    endpoints: (builder) => ({
+        registerSeller: builder.mutation({
+            query: (newUser) => ({
+                url: "/register",
+                method: "POST",
+                body: newUser,
             }),
-            refetchOnMount:true,
-            invalidatesTags:["Sellers"],
         }),
-        deleteUser:builder.mutation({
-            query:(userId)=>({
-                url:`/sellers/${userId}`,
-                method:"DELETE",
+        loginSeller: builder.mutation({
+            query: (credentials) => ({
+                url: "/login",
+                method: "POST",
+                body: credentials,
             }),
-            invalidatesTags:["Sellers"],
         }),
-        editProfile:builder.mutation({
-            query:(profileData)=>({
-                url:`/edit-profile`,
-                method:"PATCH",
-                body:profileData
-            })
+        logoutSeller: builder.mutation({
+            query: () => ({
+                url: "/logout",
+                method: "POST",
+            }),
         }),
-    })
-})
-export const {useRegisterUserMutation,useLoginUserMutation,useLogoutUserMutation,useDeleteUserMutation,useEditProfileMutation,useGetUserQuery}=sellerauthApi;
+        getSeller: builder.query({
+            query: () => ({
+                url: "/sellers",
+                method: "GET",
+            }),
+            providesTags: ["Seller"], // FIXED: Use `providesTags`
+        }),
+        deleteSeller: builder.mutation({
+            query: (userId) => ({
+                url: `/sellers/${userId}`,
+                method: "DELETE",
+            }),
+            invalidatesTags: ["Seller"], // FIXED: Match `tagTypes`
+        }),
+        editSellerProfile: builder.mutation({
+            query: (profileData) => ({
+                url: `/edit-profile`,
+                method: "PATCH",
+                body: profileData,
+            }),
+            invalidatesTags: ["Seller"], // FIXED: Match `tagTypes`
+        }),
+    }),
+});
+
+export const {
+    useRegisterSellerMutation,
+    useLoginSellerMutation,
+    useLogoutSellerMutation,
+    useDeleteSellerMutation,
+    useEditSellerProfileMutation,
+    useGetSellerQuery,
+} = sellerauthApi;
+
 export default sellerauthApi;
