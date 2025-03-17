@@ -14,7 +14,7 @@ const UserProfile = () => {
         username: '',
         profileImage: '',
         bio: '',
-        profession: '',
+        address: '',
         userId: ''
     });
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,7 +25,7 @@ const UserProfile = () => {
             username: user?.username || '',
             profileImage: user?.profileImage || '',
             bio: user?.bio || '',
-            profession: user?.profession || '',
+            address: user?.address || '',
             userId: user?._id || ''
            })
         }
@@ -44,7 +44,7 @@ const UserProfile = () => {
             username: formData.username,
             profileImage: formData.profileImage,
             bio: formData.bio,
-            profession: formData.profession,
+            address: formData.address,
             userId: formData.userId
         }
         try {
@@ -69,7 +69,7 @@ const UserProfile = () => {
                     <div className='ml-6'>
                         <h3 className='text-2xl font-semibold'>Username: {formData?.username || 'N/A'}</h3>
                         <p className='text-gray-700'>User Bio: {formData.bio || 'N/A'}</p>
-                        <p className='text-gray-700'>Profession: {formData.profession || 'N/A'}</p>
+                        <p className='text-gray-700'>address: {formData.address || 'N/A'}</p>
                     </div>
                     <button
                         onClick={() => setIsModalOpen(true)}
@@ -121,10 +121,10 @@ const UserProfile = () => {
                                     ></textarea>
                                 </div>
                                 <div className='mb-4'>
-                                    <label htmlFor="profession" className='block text-sm font-medium text-gray-700 '>Profession</label>
-                                    <input type="text" name='profession' value={formData?.profession}
+                                    <label htmlFor="address" className='block text-sm font-medium text-gray-700 '>address</label>
+                                    <input type="text" name='address' value={formData?.address}
                                         onChange={handleChange}
-                                        placeholder='profession'
+                                        placeholder='room no B-123,MHR,IIT-BBS'
                                         className='mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm'
                                         required
                                     />
