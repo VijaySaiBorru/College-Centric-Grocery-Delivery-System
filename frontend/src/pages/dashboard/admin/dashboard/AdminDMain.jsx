@@ -5,7 +5,7 @@ import AdminStatsChart from './AdminStatsChart';
 import { useGetAdminStatsQuery } from '../../../../redux/features/stats/statsApi';
 
 const AdminDMain = () => {
-    const {seller} = useSelector((state) => state.sellerauth);
+    const {seller} = useSelector((state) => state.sellerauth.seller);
     const {data: stats, error, isLoading} = useGetAdminStatsQuery();
     if(isLoading) return <div>Loading...</div>
     if(!stats) return <div>No stats found</div>
