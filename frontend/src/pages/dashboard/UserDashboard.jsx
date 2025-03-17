@@ -30,7 +30,7 @@ const UserDashboard = () => {
     <div className='space-y-5 bg-white p-8 md:h-screen flex flex-col justify-between'>
         <div>
             <div className='nav__logo'>
-            <Link to="/">E-Commerce<span>.</span></Link>
+            <Link to="/">Grocery Store<span>.</span></Link>
             <p className='text-xs italic'>User dashboard</p>
             </div>
             <hr className='mt-5' />

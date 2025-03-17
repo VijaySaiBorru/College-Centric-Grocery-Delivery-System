@@ -61,7 +61,7 @@ router.get("/:userId",async(req,res)=>{
     try{
        const reviews = await Reviews.find({userId:userId}).sort({createdAt:-1});
        if(reviews.length === 0){
-        res.status(404).send({message:"No reviews found",});
+        res.status(200).send({message:"No reviews found",reviews});
        }
        res.status(200).send(reviews);
     }

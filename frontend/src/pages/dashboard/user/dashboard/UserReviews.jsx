@@ -15,7 +15,7 @@ const UserReviews = () => {
     }
   return (
     <div className='py-6'>
-        <h2 className='text-2xl font-bold mb-8"'>Your given Reviews</h2>
+        <h2 className='text-2xl font-bold mb-8'>Your given Reviews</h2>
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-8 gap-6'>
             {
                 reviews && reviews.map((review, index) => (
