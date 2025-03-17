@@ -27,7 +27,7 @@ const Login = () => {
                 const { seller } = response;
                 dispatch(setSeller({ seller }));
                 alert('Seller Login Successful');
-                navigate('/dashboard');
+                navigate('/dashboard/admin');
             } else if (role === "student") {
                 const response = await loginUser(data).unwrap();
                 const { user } = response;
