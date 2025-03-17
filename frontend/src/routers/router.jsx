@@ -10,7 +10,7 @@ import Register from "../components/Register";
 import ContactPage from "../pages/contact/contact";
 import PaymentSuccess from "../components/PaymentSuccess";
 import DashboardLayout from "../pages/dashboard/DashboardLayout";
-import PrivateRoute from "./privateRoute";
+import PrivateRoute from "./PrivateRoute";
 import UserDMain from "../pages/dashboard/user/dashboard/UserDMain";
 import UserOrders from "../pages/dashboard/user/UserOrders";
 import OrderDetails from "../pages/dashboard/user/OrderDetails";
@@ -24,7 +24,7 @@ import UpdateProduct from "../pages/dashboard/admin/manageProduct/UpdateProduct"
 import ManageUser from "../pages/dashboard/admin/users/ManageUser";
 import ManageOrders from "../pages/dashboard/admin/manageOrders/ManageOrders";
 import TeamPage from "../pages/team/TeamPage";
-import AdminProfile from "../pages/dashboard/admin/profile/adminProfile";
+import AdminProfile from "../pages/dashboard/admin/profile/AdminProfile";
 import Sellers from "../pages/sellers/Sellers";
 import SellerPage from "../pages/sellers/SellerPage";
 
