@@ -10,7 +10,8 @@ const Login = () => {
     const [message, setMessage] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isSeller, setIsSeller] = useState(false);
+    const [role, setRole] = useState('');  // ✅ Corrected state
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     
@@ -21,18 +22,20 @@ const Login = () => {
         e.preventDefault();
         const data = { email, password };
         try {
-            if (isSeller) {
+            if (role === "seller") {  // ✅ Check role correctly
                 const response = await loginSeller(data).unwrap();
                 const { seller } = response;
                 dispatch(setSeller({ seller }));
                 alert('Seller Login Successful');
                 navigate('/dashboard');
-            } else {
+            } else if (role === "student") {
                 const response = await loginUser(data).unwrap();
                 const { user } = response;
                 dispatch(setUser({ user }));
                 alert('User Login Successful');
                 navigate('/');
+            } else {
+                setMessage('Please select a valid role');
             }
         } catch (error) {
             setMessage('Please provide a valid email and password');
@@ -42,15 +45,24 @@ const Login = () => {
     return (
         <section className='h-screen flex items-center justify-center'>
             <div className='max-w-sm border shadow bg-white mx-auto p-8'>        
-                <h2 className='text-2xl font-semibold pt-5'>Login</h2>
+                <h2 className='text-2xl font-semibold pt-5'>Please Login</h2>
                 <form onSubmit={handleLogin} className='space-y-5 max-w-sm mx-auto pt-8'>
+                    
+                    {/* ✅ Fixed Role Selection Dropdown */}
                     <div className='flex items-center'>
-                        <input type='checkbox' id='isSeller' 
-                            checked={isSeller} 
-                            onChange={() => setIsSeller(!isSeller)}
-                            className='mr-2' />
-                        <label htmlFor='isSeller' className='text-sm'>Login as Seller</label>
+                        <label htmlFor='role' className='text-sm mr-2'>Select Role:</label>
+                        <select 
+                            id='role'  
+                            value={role}  
+                            onChange={(e) => setRole(e.target.value)} 
+                            className='border p-2 rounded-md'
+                        >
+                            <option value="">Select</option>
+                            <option value="student">Student</option>
+                            <option value="seller">Seller</option>
+                        </select>
                     </div>
+
                     <input type='email' name='email' id='email' 
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder='Email Address' required 
