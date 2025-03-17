@@ -7,19 +7,24 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 // create checkout session
 router.post("/create-checkout-session", async (req, res) => {
   const { products } = req.body;
+  console.log(products);
 
   try {
     const lineItems = products.map((product) => ({
       price_data: {
-        currency: "usd",
+        currency: "inr",
         product_data: {
           name: product.name,
           images: [product.image],
+          metadata: {
+            sellerId: JSON.stringify(product.sellerId) 
+          },
         },
         unit_amount: Math.round(product.price * 100),
       },
       quantity: product.quantity,
     }));
+   // console.log(lineItems);
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
@@ -44,18 +49,28 @@ router.post("/confirm-payment", async (req, res) => {
 
   try {
     const session = await stripe.checkout.sessions.retrieve(session_id, {
-      expand: ["line_items", "payment_intent"],
+      expand: ["line_items", "payment_intent","line_items.data.price.product"],
     });
 
     const paymentIntentId = session.payment_intent.id;
 
     let order = await Order.findOne({ orderId: paymentIntentId });
-
+    
     if (!order) {
-      const lineItems = session.line_items.data.map((item) => ({
-        productId: item.price.product,
-        quantity: item.quantity,
-      }));
+
+      const lineItems = session.line_items.data.map((item) => {
+        //console.log("Metadata:", JSON.parse(item.price.product.metadata.sellerId)); // Debugging
+        
+        return {
+            productId: item.price.product.id, // ✅ Extract product ID correctly
+            quantity: item.quantity,
+            sellerId: JSON.parse(item.price.product.metadata.sellerId)?._id
+                || null, // ✅ Ensures conversion if sellerId is an object
+        };
+    });
+    
+   // console.log("Final Line Items:", lineItems);
+    
 
       const amount = session.amount_total / 100;
 
