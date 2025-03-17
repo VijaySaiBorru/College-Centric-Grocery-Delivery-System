@@ -69,15 +69,17 @@ const productsApi = createApi({
             },
             providesTags: ["Products"],
         }),
-        fetchTeamProducts: builder.query({
-            query: ({ teamName, page = 1, limit = 8 }) => {
+        fetchSellerProducts: builder.query({
+            query: ({ sellerId, page = 1, limit = 8 }) => {
+                console.log(sellerId)
                 const queryParams = new URLSearchParams({
                     page: page.toString(),
                     limit: limit.toString(),
+                    sellerId:sellerId,
                 }).toString();
-        
+                
                 return {
-                    url: `/categories/${teamName}?${queryParams}`,  // Endpoint for team products
+                    url: `/seller/${sellerId}?${queryParams}`,  // Endpoint for team products
                     method: 'GET',  // Use GET method
                 };
             },
@@ -118,9 +120,10 @@ const productsApi = createApi({
             }),
             invalidatesTags:(result,error,id)=> [{type: "Products",id}],
         }),
+
     })
 });
 
-export const {useFetchTeamProductsQuery,useFetchAllProductsQuery,useFetchProductByIdQuery,useAddProductMutation,useFetchRelatedProductsQuery,useUpdateProductMutation,useDeleteProductMutation,useFetchSearchProductsQuery,useFetchTrendingProductsQuery,useFetchCategoryProductsQuery}=productsApi;
+export const {useFetchSellerProductsQuery,useFetchAllProductsQuery,useFetchProductByIdQuery,useAddProductMutation,useFetchRelatedProductsQuery,useUpdateProductMutation,useDeleteProductMutation,useFetchSearchProductsQuery,useFetchTrendingProductsQuery,useFetchCategoryProductsQuery}=productsApi;
 
 export default productsApi;

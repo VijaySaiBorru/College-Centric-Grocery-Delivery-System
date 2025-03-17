@@ -131,6 +131,28 @@ router.get('/categories/:categoryName', async (req, res) => {
     }
 });
 
+router.get('/seller/:sellerID', async (req, res) => {
+    const { sellerID,page,limit } = req.params;
+    try {
+        // const products = await Products.find({ sellerId: sellerID })
+        //     .populate({ path: 'sellerId', select: 'email' })
+        //     .sort({ createdAt: -1 })
+        //     .exec();
+        const skip=(parseInt(page)-1)*parseInt(limit);
+        const totalProducts = await Products.countDocuments({ sellerId: sellerID });
+        const totalPages = Math.ceil(totalProducts/parseInt(limit));
+        const products = await Products.find({ sellerId: sellerID })
+                                    .skip(skip)
+                                    .limit(parseInt(limit))
+                                    .populate(({ path: "sellerId", select: "email" }))
+                                    .sort({createdAt:-1}).exec();
+        res.status(200).send({products,totalPages,totalProducts}); 
+        // res.status(200).send({ products });
+    } catch (error) {
+        res.status(500).send({ message: 'Error fetching products by sellers', error });
+    }
+});
+
 router.get("/:id",async(req,res)=>{
 try{
     const productId=req.params.id;

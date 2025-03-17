@@ -1,15 +1,15 @@
 // src/pages/team/TeamPage.jsx
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useFetchTeamProductsQuery } from '../../redux/features/products/productsApi'; // Correct path
+import { useFetchSellerProductsQuery } from  "../../redux/features/products/productsApi"
 import ProductCards from "../shop/ProductCards";
 
 const TeamPage = () => {
   const { teamName } = useParams(); // Get the team name from the URL parameters
   
   // Using the RTK Query hook to fetch products based on team
-  const { data, isLoading, error } = useFetchTeamProductsQuery({
-    teamName, // Pass the team name to fetch products associated with that team
+  const { data, isLoading, error } = useFetchSellerProductsQuery({
+    SellerId,
     page: 1, // You can implement pagination if needed
     limit: 8, // Adjust the number of products per page
   });

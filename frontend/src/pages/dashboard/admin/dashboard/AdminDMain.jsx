@@ -10,12 +10,12 @@ const AdminDMain = () => {
     if(isLoading) return <div>Loading...</div>
     if(!stats) return <div>No stats found</div>
     if(error) return <div>Failed to load stats!</div>
-    console.log(seller)
+    //console.log(seller);
   return (
     <div className='p-6'>
         <div>
             <h1 className='text-2xl font-semibold mb-4'>Admin Dashboard</h1>
-            <p className='text-gray-500'>Hi, {seller?.seller.username}! Welcome to the Seller dashboard.</p>
+            <p className='text-gray-500'>Hi, {seller?.username}! Welcome to the Seller dashboard.</p>
             
             <AdminStats stats={stats}/>
             <AdminStatsChart stats={stats}/>
