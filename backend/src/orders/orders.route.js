@@ -134,6 +134,19 @@ router.get("/order/:id", async (req, res) => {
     res.status(500).send({ message: "Failed to fetch orders by user id" });
   }
 });
+router.get("/seller/:sellerid", async (req, res) => {
+  const sellerId=req.params.sellerid;
+  try {
+    const order = await Order.find({ "products.sellerId": sellerId });
+    if (!order) {
+      return res.status(404).send({ message: "Order not found" });
+    }
+    res.status(200).send(order);
+  } catch (error) {
+    console.error("Error fetching orders by user id", error);
+    res.status(500).send({ message: "Failed to fetch orders by user id" });
+  }
+});
 
 // get all orders
 router.get("/", async (req, res) => {
