@@ -10,7 +10,7 @@ const PromoBanner = () => {
       <div className='banner__card'>
         <span><i className='ri-money-dollar-circle-line'></i></span>
         <h4>100% Money Back Guaranty</h4>
-        <p>E-commerce have a review system where customers can share feedback.</p>
+        <p>Our Website had a review system where customers can share feedback.</p>
       </div>
       <div className='banner__card'>
         <span><i className='ri-user-voice-fill'></i></span>

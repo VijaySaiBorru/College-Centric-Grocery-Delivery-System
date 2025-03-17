@@ -28,7 +28,6 @@ const cartSlice = createSlice({
                 timer:1500
             });
             } else {
-              console.log("Items already added");
                 Swal.fire({
                     title:"Product Already Added to the Cart",
                     text:"You won't be able to revert this!",

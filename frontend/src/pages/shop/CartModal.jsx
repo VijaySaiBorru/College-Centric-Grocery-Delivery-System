@@ -49,7 +49,7 @@ const CartModal = ({products,isOpen,onClose}) => {
                                                         <button 
                                                         onClick={()=>handleQuantity('decrement',item._id)}
                                                         className='size-6 flex items-center justify-center
-                                                        px-1.5 rounded-full bg-gray-200text-gray-700 hover:bg-primary hover:text-white ml-8'>-</button>
+                                                        px-1.5 rounded-full bg-gray-200 text-gray-700 hover:bg-primary hover:text-white ml-8'>-</button>
                                                         <span className='px-2 text-center mx-1'>{item.quantity}</span>
                                                         <button
                                                         onClick={()=>handleQuantity('increment',item._id)}

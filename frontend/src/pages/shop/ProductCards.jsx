@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import RatingStars from "../../components/RatingStars"
 import { useDispatch } from "react-redux"
 import { addToCart } from "../../redux/features/cart/cartSlice"
+import Swal from "sweetalert2"
 const ProductCards = ({products}) => {
   const dispatch =useDispatch();
   const handleAddtoCart =(product)=>{
@@ -21,7 +22,16 @@ const ProductCards = ({products}) => {
                   e.stopPropagation();
                   if(product.quantity<=0)
                   {
-
+                    Swal.fire({
+                                        title:"Out of Stock",
+                                        text:"You won't be able to revert this!",
+                                        icon:"warning",
+                                        showCancelButton:true,
+                                        confirmButtonColor:"#3085d6",
+                                        cancelButtonColor:"#d33",
+                                        confirmButtonText:"Ok!"
+                                    })
+                                    return;
                   }
                   handleAddtoCart(product)
                 }}>
