@@ -123,7 +123,7 @@ router.get("/sellers",async(req,res)=>{
 router.patch("/edit-profile",async(req,res)=>{
     try{
         const {userId,username,profileImage,bio,address,timings,contact}=req.body;
-        console.log(req.body)
+       // console.log(req.body)
         if(!userId){
             return res.status(400).send({message:'User ID is required'})
            }

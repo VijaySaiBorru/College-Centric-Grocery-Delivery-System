@@ -4,25 +4,19 @@ import { useFetchProductByIdQuery, useUpdateProductMutation } from '../../../../
 import { useSelector } from 'react-redux';
 import TextInput from '../addProduct/TextInput';
 import SelectInput from '../addProduct/SelectInput';
-import UploadImage from '../addProduct/UploadImage';
 
 const categories = [
     { label: 'Select Category', value: '' },
-    { label: 'Accessories', value: 'accessories' },
-    { label: 'Dress', value: 'dress' },
-    { label: 'Jewellery', value: 'jewellery' },
-    { label: 'Cosmetics', value: 'cosmetics' }
-];
-
-const colors = [
-    { label: 'Select Color', value: '' },
-    { label: 'Black', value: 'black' },
-    { label: 'Red', value: 'red' },
-    { label: 'Gold', value: 'gold' },
-    { label: 'Blue', value: 'blue' },
-    { label: 'Silver', value: 'silver' },
-    { label: 'Beige', value: 'beige' },
-    { label: 'Green', value: 'green' }
+    { label: 'Clothes and Accessories', value: 'clothing' },
+    { label: 'Bakery Items', value: 'bakery' },
+    { label: 'Chips and Fried Items', value: 'chips' },
+    { label: 'Electronic Gadgets', value: 'electronics' },
+    { label: 'Fruits', value: 'fruits' },
+    { label: 'Groceries', value: 'groceries' },
+    { label: 'Soft Drinks and Juices', value: 'soft_drinks' },
+    { label: 'Stationary', value: 'stationary' },
+    { label: 'Vegetables', value: 'vegetables' },
+    { label: 'Medicines', value: 'medicine' }
 ];
 
 
@@ -31,19 +25,19 @@ const UpdateProduct = () => {
     const navigate =  useNavigate();
     const {user} = useSelector((state) => state.auth)
     const [product, setProduct] = useState({
-        name: '',
+       name: '',
         category: '',
-        color: '',
         price: '',
+        oldPrice: '',
         description: '',
+        quantity: NaN,
         image: ''
     })
 
     const {data: productData, isLoading: isProductLoading, error: fetchError, refetch} = useFetchProductByIdQuery(id);
 
-    const [newImage, setNewImage] = useState(null)
 
-    const {name, category, color, description, image: imageURL, price } = productData?.product || {};
+    const {name, category, color, description, image, price,oldPrice,quantity } = productData?.product || {};
 
     const [updateProduct, {isLoading:isUpdating, error: updateError}] = useUpdateProductMutation();
 
@@ -55,7 +49,9 @@ const UpdateProduct = () => {
                 color: color || '',
                 price: price || '',
                 description: description || '',
-                image: imageURL || ''
+                image: image || '',
+                oldPrice:oldPrice||'',
+                quantity:quantity||NaN
             })
         }
     }, [productData])
@@ -71,16 +67,11 @@ const UpdateProduct = () => {
 
     };
 
-    const handleImageChange= (image) => {
-        setNewImage(image);
-    }
-
     const handleSubmit =  async (e) => {
         e.preventDefault();
 
         const updatedProduct = {
-            ...product,
-            image: newImage ? newImage : product.image, 
+            ...product, 
             author: user?._id
         };
 
@@ -101,12 +92,12 @@ const UpdateProduct = () => {
     <div className='container mx-auto mt-8'>
         <h2 className='text-2xl font-bold mb-6'>Update Product </h2>
         <form onSubmit={handleSubmit} className='space-y-4'>
-                <TextInput
-                label="Product Name"
-                name="name"
-                placeholder="Ex: Diamond Earrings"
-                value={product.name}
-                onChange={handleChange}
+        <TextInput
+                    label="Product Name"
+                    name="name"
+                    placeholder="Ex: Diamond Earrings"
+                    value={product.name}
+                    onChange={handleChange}
                 />
                 <SelectInput
                     label="Category"
@@ -115,29 +106,38 @@ const UpdateProduct = () => {
                     onChange={handleChange}
                     options={categories}
                 />
-                <SelectInput
-                    label="Color"
-                    name="color"
-                    value={product.color}
-                    onChange={handleChange}
-                    options={colors}
-                />
                 <TextInput
-                    label="Price"
-                    name="price"
+                    label="New Price"
+                    name="price" 
                     type="number"
                     placeholder="50"
                     value={product.price}
                     onChange={handleChange}
                 />
-
-                 <UploadImage
-                name="image"
-                id="image"
-                value={newImage || product.image}
-                placeholder='Image'
-                setImage={handleImageChange}
+                <TextInput
+                    label="Old Price"
+                    name="oldPrice"
+                    type="number"
+                    placeholder="50"
+                    value={product.oldPrice}
+                    onChange={handleChange}
                 />
+                <TextInput
+                    label="Product Image Url"
+                    name="image"
+                    placeholder="https://product_image.url"
+                    value={product.image}
+                    onChange={handleChange}
+                />
+                <TextInput
+                    label="Quantity"
+                    name="quantity" 
+                    type="number"
+                    placeholder="50"
+                    value={product.quantity}
+                    onChange={handleChange}
+                />
+
                 <div>
                 <label htmlFor="description" className='block text-sm font-medium text-gray-700'>Description</label>
                 <textarea name="description" id="description"

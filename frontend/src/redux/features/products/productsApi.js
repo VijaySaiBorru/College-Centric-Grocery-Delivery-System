@@ -103,7 +103,7 @@ const productsApi = createApi({
         }),
         updateProduct:builder.mutation({
             query:({id,...rest})=>({
-                url:`/create-product/${id}`,
+                url:`/update-product/${id}`,
                 method:"PATCH",
                 body:rest,
                 credentials:"include",

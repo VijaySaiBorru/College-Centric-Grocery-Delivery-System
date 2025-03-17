@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
+import { useNavigate } from 'react-router-dom';
 import avatarImg from '../../../../assets/avatar.png'
 import { setSeller } from '../../../../redux/features/sellerauth/sellerauthSlice';
 import { useEditSellerProfileMutation } from '../../../../redux/features/sellerauth/sellerauthApi';
@@ -10,7 +10,7 @@ const AdminProfile = () => {
     const { seller } = useSelector((state) => state.sellerauth.seller);
     console.log(seller);
     const [editProfile, { isLoading, isError, error, isSuccess }] = useEditSellerProfileMutation();
-
+ const navigate = useNavigate();
     const [formData, setformData] = useState({
         username: '',
         profileImage: '',
@@ -56,10 +56,13 @@ const AdminProfile = () => {
         }
         try {
             const response = await editProfile(updatedUser).unwrap();
-            console.log(response)
+            //console.log(response)
             dispatch(setSeller(response.seller));
+           // console.log(seller);
             localStorage.setItem('seller', JSON.stringify(response.seller))
             alert('Profile updated successfully!');
+            navigate('/dashboard/admin')
+            
         } catch (error) {
           console.error("Failed to update profile", error)  ;
           alert("Failed to update profile. Please try again")
@@ -75,10 +78,10 @@ const AdminProfile = () => {
                     <img src={seller?.profileImage || avatarImg} alt="" className='w-32 h-32 object-cover rounded-full' />
                     <div className='ml-6'>
                         <h3 className='text-2xl font-semibold'>Grocery Shop Name: {seller?.username || 'N/A'}</h3>
-                        <p className='text-gray-700'>Shop Bio: {seller.bio || 'N/A'}</p>
-                        <p className='text-gray-700'>Shop Address: {seller.address || 'N/A'}</p>
-                        <p className='text-gray-700'>Timings of Seller: {seller.timings || 'N/A'}</p>
-                        <p className='text-gray-700'>Contact Number: {seller.contact || 'N/A'}</p>
+                        <p className='text-gray-700'>Shop Bio: {seller?.bio || 'N/A'}</p>
+                        <p className='text-gray-700'>Shop Address: {seller?.address || 'N/A'}</p>
+                        <p className='text-gray-700'>Timings of Seller: {seller?.timings || 'N/A'}</p>
+                        <p className='text-gray-700'>Contact Number: {seller?.contact || 'N/A'}</p>
                     </div>
                     <button
                         onClick={() => setIsModalOpen(true)}
@@ -102,7 +105,7 @@ const AdminProfile = () => {
                             <h2 className='text-2xl font-bold mb-4'>Edit Profile</h2>
                             <form onSubmit={handleSubmit}> 
                                 <div className='mb-4'>
-                                    <label htmlFor="username" className='block text-sm font-medium text-gray-700 '>Username</label>
+                                    <label htmlFor="username" className='block text-sm font-medium text-gray-700 '>Storename</label>
                                     <input type="text" name='username' value={formData?.username}
                                         onChange={handleChange}
                                         placeholder='username'
@@ -111,14 +114,14 @@ const AdminProfile = () => {
                                     />
                                 </div>
                                 <div className='mb-4'>
-                                    <label htmlFor="profileImage" className='block text-sm font-medium text-gray-700 '>Profile Image Url</label>
+                                    <label htmlFor="profileImage" className='block text-sm font-medium text-gray-700 '>Store Image Url</label>
                                     <input type="text" name='profileImage' value={formData?.profileImage}
                                         onChange={handleChange}
                                         placeholder='profileImage url'
                                         className='mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm' required />
                                 </div>
                                 <div className='mb-4'>
-                                    <label htmlFor="bio" className='block text-sm font-medium text-gray-700 '>Write Your Bio</label>
+                                    <label htmlFor="bio" className='block text-sm font-medium text-gray-700 '>Write sho Bio</label>
                                     <textarea name="bio"
                                         rows= "2"
                                         className='mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm'

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import TextInput from './TextInput';
 import SelectInput from './SelectInput';
 import UploadImage from './UploadImage';
@@ -26,14 +26,16 @@ const AddProduct = () => {
     const [product, setProduct] = useState({
         name: '',
         category: '',
-        newPrice: '',
+        price: '',
         oldPrice: '',
-        description: ''
+        description: '',
+        quantity: NaN,
+        image: ''
     });
-    const [image, setImage] = useState('');
 
-    const [AddProduct, {isLoading, error}] = useAddProductMutation()
-  
+
+    const [AddProduct, { isLoading, error }] = useAddProductMutation()
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -47,23 +49,25 @@ const AddProduct = () => {
 
     const navigate = useNavigate()
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if(!product.name || !product.category || !product.newPrice || !product.description || !product.oldPrice) {
+        if (!product.name || !product.category || !product.price || !product.description || !product.oldPrice) {
             alert('Please fill all the required fields');
             return;
         }
 
         try {
-            await AddProduct({...product, image, sellerId: seller?._id}).unwrap();
+            await AddProduct({ ...product, sellerId: seller?._id }).unwrap();
             alert('Product added successfully');
-            setProduct({ name: '',
+            setProduct({
+                name: '',
                 category: '',
-                newPrice: '',
+                price: '',
                 oldPrice: '',
-                description: ''})
-                setImage('');
-                navigate("/dashboard/add-new-product")
+                description: ''
+            })
+            setImage('');
+            navigate("/dashboard/add-new-product")
         } catch (error) {
             console.log("Failed to submit product", error);
         }
@@ -87,50 +91,58 @@ const AddProduct = () => {
                     onChange={handleChange}
                     options={categories}
                 />
-               <TextInput
+                <TextInput
                     label="New Price"
-                    name="newPrice" // Change name to newPrice
+                    name="price" 
                     type="number"
                     placeholder="50"
-                    value={product.newPrice}
+                    value={product.price}
                     onChange={handleChange}
                 />
                 <TextInput
                     label="Old Price"
-                    name="oldPrice" // Change name to oldPrice
+                    name="oldPrice"
                     type="number"
                     placeholder="50"
                     value={product.oldPrice}
                     onChange={handleChange}
                 />
-
-                <UploadImage
-                name="image"
-                id="image"
-                value={e => setImage(e.target.value)}
-                placeholder='Image'
-                setImage={setImage}
+                <TextInput
+                    label="Product Image Url"
+                    name="image"
+                    placeholder="https://product_image.url"
+                    value={product.image}
+                    onChange={handleChange}
                 />
+                <TextInput
+                    label="Quantity"
+                    name="quantity" 
+                    type="number"
+                    placeholder="50"
+                    value={product.quantity}
+                    onChange={handleChange}
+                />
+
                 <div>
-                <label htmlFor="description" className='block text-sm font-medium text-gray-700'>Description</label>
-                <textarea name="description" id="description"
-                className='add-product-InputCSS'
-                value={product.description}
-                placeholder='Write a product description'
-                onChange={handleChange}
-                ></textarea>
+                    <label htmlFor="description" className='block text-sm font-medium text-gray-700'>Description</label>
+                    <textarea name="description" id="description"
+                        className='add-product-InputCSS'
+                        value={product.description}
+                        placeholder='Write a product description'
+                        onChange={handleChange}
+                    ></textarea>
                 </div>
 
                 <div>
                     <button type='submit'
-                    className='add-product-btn'
-                   
+                        className='add-product-btn'
+
                     >Add Product</button>
                 </div>
 
             </form>
 
-           
+
         </div>
     );
 };
