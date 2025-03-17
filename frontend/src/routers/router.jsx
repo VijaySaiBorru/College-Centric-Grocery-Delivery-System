@@ -39,7 +39,7 @@ const router = createBrowserRouter([
             {path:"/search", element: <Search/>},
             {path:"/shop", element: <ShopPage/>},
             {path:"/sellers", element: <Sellers />},
-            {path:"/seller/:sellerId", element: <SellerPage/>},
+            {path:"/seller/:sellerId/:username", element: <SellerPage/>},
             {path:"/contact", element: <ContactPage/>},
             {path:"/shop/:id", element: <SingleProduct/>},
             {path:"/success" , element: <PaymentSuccess />},
