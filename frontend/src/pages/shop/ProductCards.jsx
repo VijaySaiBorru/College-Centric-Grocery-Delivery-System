@@ -19,6 +19,7 @@ const ProductCards = ({products}) => {
               <div className="hover:block absolute top-3 right-3">
                 <button onClick={(e)=>{
                   e.stopPropagation();
+                  
                   handleAddtoCart(product)
                 }}>
                   <i className="ri-shopping-cart-2-line bg-primary p-1.5 text-white hover:bg-primary-dark"></i>
