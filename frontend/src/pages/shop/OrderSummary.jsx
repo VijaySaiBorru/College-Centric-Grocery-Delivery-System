@@ -16,8 +16,9 @@ const OrderSummary = () => {
     const makePayment = async(e)=>{
         if (!user)
         {
-            alert("u should login before checkout");
+            alert("You should login before checkout");
             navigate('/login');
+            return;
         }
         const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PK);
         const body = {
