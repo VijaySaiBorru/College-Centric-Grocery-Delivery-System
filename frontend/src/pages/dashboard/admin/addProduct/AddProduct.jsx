@@ -64,9 +64,9 @@ const AddProduct = () => {
                 category: '',
                 price: '',
                 oldPrice: '',
-                description: ''
+                description: '',
+                image: ""
             })
-            setImage('');
             navigate("/dashboard/add-new-product")
         } catch (error) {
             console.log("Failed to submit product", error);
