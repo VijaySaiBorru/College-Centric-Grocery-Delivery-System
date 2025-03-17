@@ -324,6 +324,7 @@ nav {
   bottom: -9rem;
   transform: translateX(-50%);
   max-width: 550px;
+  background-color: transparent;
 }
 
 .deals__content {

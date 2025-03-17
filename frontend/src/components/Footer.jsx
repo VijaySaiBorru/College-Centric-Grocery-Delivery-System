@@ -25,7 +25,7 @@ const Footer = () => {
             </p>
         </div>
         <div className='footer__col'>
-            <h4>COMPANY</h4>
+            <h4>Stores</h4>
             <a href="/">Home</a>
             <a href="/">About Us</a>
             <a href="/">Work With Us</a>
@@ -36,14 +36,14 @@ const Footer = () => {
             <h4>USEFUL LINK</h4>
             <a href="/">Help</a>
             <a href="/">Track your Order</a>
-            <a href="/">T-shirts</a>
-            <a href="/">Caps</a>
-            <a href="/">Stickers</a>
+            <a href="/">Near by stores</a>
+            <a href="/">Fruits and vegetables</a>
+            <a href="/">clothing</a>
         </div>
         <div className='footer__col'>
             <h4>INSTAGRAM</h4>
             <div className='instagram__grid'>
-                <img src={instaImg1} alt="" />
+                <img src="https://imgs.search.brave.com/S8OI2vgYSjFSh8U2VE6BJSblJDzKG21UDE3xuRKjA-I/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzA0LzI5LzgyLzkz/LzM2MF9GXzQyOTgy/OTMwNV9obmx3S1hN/cmRiaWdnTmhJSVFp/dXUzWXhrQXVOcUpi/Ti5qcGc" alt="" />
                 <img src={instaImg2} alt="" />
                 <img src={instaImg3} alt="" />
                 <img src={instaImg4} alt="" />

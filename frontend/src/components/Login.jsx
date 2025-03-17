@@ -48,7 +48,7 @@ const Login = () => {
                 <h2 className='text-2xl font-semibold pt-5'>Please Login</h2>
                 <form onSubmit={handleLogin} className='space-y-5 max-w-sm mx-auto pt-8'>
                     
-                    {/* ✅ Fixed Role Selection Dropdown */}
+                    
                     <div className='flex items-center'>
                         <label htmlFor='role' className='text-sm mr-2'>Select Role:</label>
                         <select 

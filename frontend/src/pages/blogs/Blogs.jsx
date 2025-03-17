@@ -1,11 +1,17 @@
 import blogsData from "../../data/blogs.json";  // Assuming blogsData contains IPL-related blog information
-
+import storeImg1 from "../../assets/store-image1.png";
+import storeImg2 from "../../assets/store-image2.png";
+import storeImg3 from "../../assets/store-image3.png";
+import storeImg4 from "../../assets/store-image4.png";
+const map=[
+  storeImg1,storeImg2,storeImg3,storeImg4
+]
 const Blogs = () => {
   return (
     <section className="section__container blog__container">
-      <h2 className="section__header">Latest IPL News & Updates</h2>
+      <h2 className="section__header">Our latest stores</h2>
       <p className="section__subheader">
-        Stay up-to-date with the latest news, insights, and stories from the Indian Premier League. Explore team features, player highlights, match analysis, and more!
+      "Unleash freshness  healthy, everyday essentials "
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-12">
         {blogsData.map((blog, index) => (
@@ -17,7 +23,7 @@ const Blogs = () => {
             className="blog__card cursor-pointer hover:scale-105 transition-all duration-300"
           >
             <img
-              src={blog.imageUrl}
+              src={map[index]}
               alt="blog image"
               className="w-full h-auto object-cover rounded-lg"
             />
