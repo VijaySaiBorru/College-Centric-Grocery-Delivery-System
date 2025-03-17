@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { logout } from '../../redux/features/auth/authSlice'
 
 const navItems=[
+    {path:'/dashboard/adminprofile',label:'Profile'},
     {path:'/dashboard/admin',label:'Dashboard'},
     { path: '/dashboard/add-new-product', label: 'Add Product' },
     { path: '/dashboard/manage-products', label: 'Manage Products' },

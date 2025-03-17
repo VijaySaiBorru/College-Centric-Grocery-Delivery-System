@@ -58,7 +58,7 @@ const router = createBrowserRouter([
             { path: 'payments', element: <UserPayments /> },
             { path: 'profile', element: <UserProfile /> },
             { path: 'reviews', element: <UserReviews /> },
-
+            { path: 'adminprofile', element: <PrivateRoute role="seller"><AdminDMain/></PrivateRoute> },
             { path: 'admin', element: <PrivateRoute role="seller"><AdminDMain/></PrivateRoute> },
             { path: 'add-new-product', element: <PrivateRoute role="seller"><AddProduct /></PrivateRoute> },
             { path: 'manage-products', element: <PrivateRoute role="seller"><ManageProduct /></PrivateRoute> },
