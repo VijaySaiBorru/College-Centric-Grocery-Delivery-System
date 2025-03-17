@@ -69,7 +69,7 @@ const UserProfile = () => {
                     <div className='ml-6'>
                         <h3 className='text-2xl font-semibold'>Username: {formData?.username || 'N/A'}</h3>
                         <p className='text-gray-700'>User Bio: {formData.bio || 'N/A'}</p>
-                        <p className='text-gray-700'>address: {formData.address || 'N/A'}</p>
+                        <p className='text-gray-700'>Address: {formData.address || 'N/A'}</p>
                     </div>
                     <button
                         onClick={() => setIsModalOpen(true)}
@@ -121,7 +121,7 @@ const UserProfile = () => {
                                     ></textarea>
                                 </div>
                                 <div className='mb-4'>
-                                    <label htmlFor="address" className='block text-sm font-medium text-gray-700 '>address</label>
+                                    <label htmlFor="address" className='block text-sm font-medium text-gray-700 '>Address</label>
                                     <input type="text" name='address' value={formData?.address}
                                         onChange={handleChange}
                                         placeholder='room no B-123,MHR,IIT-BBS'

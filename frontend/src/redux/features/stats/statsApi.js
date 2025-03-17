@@ -14,7 +14,7 @@ export const statsApi = createApi({
         providesTags:["Staats"],
         }),
         getAdminStats:builder.query({
-            query:()=>"/admin-stats",
+            query:(sellerId)=>`/admin-stats/${sellerId}`,
             providesTags:["Staats"],
         }),
     })

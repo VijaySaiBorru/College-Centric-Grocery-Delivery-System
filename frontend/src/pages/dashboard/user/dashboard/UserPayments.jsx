@@ -22,7 +22,7 @@ const UserPayments = () => {
                         <li key={index}>
                             <h5 className='font-medium text-gray-800 mb-2'>Order #{index+1}</h5>
                             <div>
-                                <span className='text-gray-600'>Order #${item?.amount.toFixed(2)}</span>
+                                <span className='text-gray-600'>Order Amount ₹{item?.amount.toFixed(2)}</span>
                             </div>
                             <div className='flex md:flex-row items-center space-x-2'>
                                 <span  className='text-gray-600'>{new Date(item?.createdAt).toLocaleString()}</span>

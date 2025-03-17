@@ -4,6 +4,7 @@ const Order = require('../orders/orders.model');
 const Reviews = require('../reviews/reviews.model');
 const Products = require('../products/products.model');
 const router = express.Router();
+const mongoose = require("mongoose");
 
 // user stats by email
 router.get('/user-stats/:email', async(req, res) => {
@@ -46,13 +47,15 @@ router.get('/user-stats/:email', async(req, res) => {
 })
 
 // admin status 
-router.get('/admin-stats', async (req, res) => {
+router.get('/admin-stats/:sellerId', async (req, res) => {
+   const sellerId = req.params.sellerId; 
     try {
+      const sellerId = new mongoose.Types.ObjectId(req.params.sellerId);
       // Count total orders
-      const totalOrders = await Order.countDocuments();
+      const totalOrders = await Order.countDocuments({ "products.sellerId": sellerId });
   
       // Count total products
-      const totalProducts = await Products.countDocuments();
+      const totalProducts = await Products.countDocuments({ sellerId });
   
       // Count total reviews
       const totalReviews = await Reviews.countDocuments();
@@ -62,6 +65,7 @@ router.get('/admin-stats', async (req, res) => {
   
       // Calculate total earnings by summing the 'amount' of all orders
       const totalEarningsResult = await Order.aggregate([
+        { $match: { "products.sellerId": sellerId } }, // Filter by seller
         {
           $group: {
             _id: null,
@@ -69,6 +73,14 @@ router.get('/admin-stats', async (req, res) => {
           },
         },
       ]);
+      // const totalEarningsResult = await Order.aggregate([
+      //   {
+      //     $group: {
+      //       _id: null,
+      //       totalEarnings: { $sum: "$amount" },
+      //     },
+      //   },
+      // ]);
   
       const totalEarnings = totalEarningsResult.length > 0 ? totalEarningsResult[0].totalEarnings : 0;
   
