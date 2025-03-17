@@ -24,7 +24,6 @@ import UpdateProduct from "../pages/dashboard/admin/manageProduct/UpdateProduct"
 import ManageUser from "../pages/dashboard/admin/users/ManageUser";
 import ManageOrders from "../pages/dashboard/admin/manageOrders/ManageOrders";
 import TeamPage from "../pages/team/TeamPage";
-import SellerLogin from "../components/SellerLogin";
 const router = createBrowserRouter([
     {
         path:"/",
@@ -44,12 +43,6 @@ const router = createBrowserRouter([
     {
         path:"/login",
         element: <Login/>,
-        
-    },
-    {
-        path:"/sellerlogin",
-        element: <SellerLogin />,
-        
     },
     {
         path:"/register",
