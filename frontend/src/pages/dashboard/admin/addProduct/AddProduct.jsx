@@ -8,32 +8,26 @@ import { useNavigate } from 'react-router-dom';
 
 const categories = [
     { label: 'Select Category', value: '' },
-    { label: 'Accessories', value: 'accessories' },
-    { label: 'Dress', value: 'dress' },
-    { label: 'Jewellery', value: 'jewellery' },
-    { label: 'Cosmetics', value: 'cosmetics' },
-    { label: 'Skin Care', value: 'skincare' }
-];
-
-const colors = [
-    { label: 'Select Color', value: '' },
-    { label: 'Black', value: 'black' },
-    { label: 'Red', value: 'red' },
-    { label: 'Gold', value: 'gold' },
-    { label: 'Blue', value: 'blue' },
-    { label: 'Silver', value: 'silver' },
-    { label: 'Beige', value: 'beige' },
-    { label: 'Green', value: 'green' }
+    { label: 'Clothes and Accessories', value: 'clothing' },
+    { label: 'Bakery Items', value: 'bakery' },
+    { label: 'Chips and Fried Items', value: 'chips' },
+    { label: 'Electronic Gadgets', value: 'electronics' },
+    { label: 'Fruits', value: 'fruits' },
+    { label: 'Groceries', value: 'groceries' },
+    { label: 'Soft Drinks and Juices', value: 'soft_drinks' },
+    { label: 'Stationary', value: 'stationary' },
+    { label: 'Vegetables', value: 'vegetables' },
+    { label: 'Medicines', value: 'medicine' }
 ];
 
 const AddProduct = () => {
-    const { user } = useSelector((state) => state.auth);
+    const { seller } = useSelector((state) => state.sellerauth.seller);
 
     const [product, setProduct] = useState({
         name: '',
         category: '',
-        color: '',
-        price: '',
+        newPrice: '',
+        oldPrice: '',
         description: ''
     });
     const [image, setImage] = useState('');
@@ -55,21 +49,21 @@ const AddProduct = () => {
 
     const handleSubmit = async(e) => {
         e.preventDefault();
-        if(!product.name || !product.category || !product.price || !product.description || !product.color) {
+        if(!product.name || !product.category || !product.newPrice || !product.description || !product.oldPrice) {
             alert('Please fill all the required fields');
             return;
         }
 
         try {
-            await AddProduct({...product, image, author: user?._id}).unwrap();
+            await AddProduct({...product, image, sellerId: seller?._id}).unwrap();
             alert('Product added successfully');
             setProduct({ name: '',
                 category: '',
-                color: '',
-                price: '',
+                newPrice: '',
+                oldPrice: '',
                 description: ''})
                 setImage('');
-                navigate("/shop")
+                navigate("/dashboard/add-new-product")
         } catch (error) {
             console.log("Failed to submit product", error);
         }
@@ -93,22 +87,23 @@ const AddProduct = () => {
                     onChange={handleChange}
                     options={categories}
                 />
-                <SelectInput
-                    label="Color"
-                    name="color"
-                    value={product.color}
-                    onChange={handleChange}
-                    options={colors}
-                />
-                <TextInput
-                    label="Price"
-                    name="price"
+               <TextInput
+                    label="New Price"
+                    name="newPrice" // Change name to newPrice
                     type="number"
                     placeholder="50"
-                    value={product.price}
+                    value={product.newPrice}
                     onChange={handleChange}
                 />
-   
+                <TextInput
+                    label="Old Price"
+                    name="oldPrice" // Change name to oldPrice
+                    type="number"
+                    placeholder="50"
+                    value={product.oldPrice}
+                    onChange={handleChange}
+                />
+
                 <UploadImage
                 name="image"
                 id="image"
