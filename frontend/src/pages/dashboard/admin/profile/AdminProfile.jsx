@@ -7,14 +7,18 @@ import { useEditSellerProfileMutation } from '../../../../redux/features/sellera
 
 const AdminProfile = () => {
     const dispatch = useDispatch();
-    const { seller } = useSelector((state) => state.sellerauth);
+    const { seller } = useSelector((state) => state.sellerauth.seller);
+    console.log(seller);
     const [editProfile, { isLoading, isError, error, isSuccess }] = useEditSellerProfileMutation();
 
     const [formData, setformData] = useState({
         username: '',
         profileImage: '',
         bio: '',
-        userId: ''
+        userId: '',
+        address:'',
+        timings:"",
+        contact:"",
     });
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -24,7 +28,10 @@ const AdminProfile = () => {
             username: seller?.username || '',
             profileImage: seller?.profileImage || '',
             bio: seller?.bio || '',
-            userId: seller?._id || ''
+            userId: seller?._id || '',
+            address: seller?.address || '',
+            timings: seller?.timings || "",
+            contact: seller?.contact || "",
            })
         }
     }, [seller])
@@ -42,12 +49,15 @@ const AdminProfile = () => {
             username: formData.username,
             profileImage: formData.profileImage,
             bio: formData.bio,
-            userId: formData.userId
+            userId: formData.userId,
+            address: formData.address,
+            timings: formData.timings,
+            contact: formData.contact,
         }
         try {
             const response = await editProfile(updatedUser).unwrap();
             console.log(response)
-            dispatch(setUser(response.seller));
+            dispatch(setSeller(response.seller));
             localStorage.setItem('seller', JSON.stringify(response.seller))
             alert('Profile updated successfully!');
         } catch (error) {
@@ -62,11 +72,13 @@ const AdminProfile = () => {
         <div className='container mx-auto p-6'>
             <div className='bg-white shadow-md rounded-lg p-6'>
                 <div className='flex items-center mb-4'>
-                    <img src={formData?.profileImage || avatarImg} alt="" className='w-32 h-32 object-cover rounded-full' />
+                    <img src={seller?.profileImage || avatarImg} alt="" className='w-32 h-32 object-cover rounded-full' />
                     <div className='ml-6'>
-                        <h3 className='text-2xl font-semibold'>Sellername: {formData?.username || 'N/A'}</h3>
-                        <p className='text-gray-700'>Seller Bio: {formData.bio || 'N/A'}</p>
-                        
+                        <h3 className='text-2xl font-semibold'>Grocery Shop Name: {seller?.username || 'N/A'}</h3>
+                        <p className='text-gray-700'>Shop Bio: {seller.bio || 'N/A'}</p>
+                        <p className='text-gray-700'>Shop Address: {seller.address || 'N/A'}</p>
+                        <p className='text-gray-700'>Timings of Seller: {seller.timings || 'N/A'}</p>
+                        <p className='text-gray-700'>Contact Number: {seller.contact || 'N/A'}</p>
                     </div>
                     <button
                         onClick={() => setIsModalOpen(true)}
@@ -103,21 +115,46 @@ const AdminProfile = () => {
                                     <input type="text" name='profileImage' value={formData?.profileImage}
                                         onChange={handleChange}
                                         placeholder='profileImage url'
-                                        className='mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm'
-                                        required
-                                    />
+                                        className='mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm' required />
                                 </div>
                                 <div className='mb-4'>
                                     <label htmlFor="bio" className='block text-sm font-medium text-gray-700 '>Write Your Bio</label>
                                     <textarea name="bio"
-                                        row="3"
+                                        rows= "2"
                                         className='mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm'
                                         value={formData?.bio}
                                         onChange={handleChange}
                                         placeholder='add your bio'
                                     ></textarea>
                                 </div>
-        
+                                <div className='mb-4'>
+                                    <label htmlFor="address" className='block text-sm font-medium text-gray-700 '>Address of the Shop</label>
+                                    <textarea name="address"
+                                        rows= "2"
+                                        className='mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm'
+                                        value={formData?.address}
+                                        onChange={handleChange}
+                                        placeholder='add your shop address'
+                                    ></textarea>
+                                </div>
+                                <div className='mb-4'>
+                                    <label htmlFor="contact" className='block text-sm font-medium text-gray-700 '>Contact :</label>
+                                    <input type="text" name='contact' value={formData?.contact}
+                                        onChange={handleChange}
+                                        placeholder='+91 1234567890'
+                                        className='mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm'
+                                        required
+                                    />
+                                </div>
+                                <div className='mb-4'>
+                                    <label htmlFor="timings" className='block text-sm font-medium text-gray-700 '>Shop Timings :</label>
+                                    <input type="text" name='timings' value={formData?.timings}
+                                        onChange={handleChange}
+                                        placeholder='06:00 AM to 10:00 PM'
+                                        className='mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm'
+                                        required
+                                    />
+                                </div>
                                 <button className={`mt-4 w-full bg-blue-500 text-white py-2 px-4 rounded-md ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
                                     type='submit'
                                     disabled={isLoading}

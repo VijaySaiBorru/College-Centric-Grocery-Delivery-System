@@ -113,7 +113,7 @@ const UserProfile = () => {
                                 <div className='mb-4'>
                                     <label htmlFor="bio" className='block text-sm font-medium text-gray-700 '>Write Your Bio</label>
                                     <textarea name="bio"
-                                        row="3"
+                                        rows="3"
                                         className='mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm'
                                         value={formData?.bio}
                                         onChange={handleChange}
