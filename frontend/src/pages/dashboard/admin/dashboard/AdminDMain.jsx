@@ -6,7 +6,7 @@ import { useGetAdminStatsQuery } from '../../../../redux/features/stats/statsApi
 
 const AdminDMain = () => {
     const {seller} = useSelector((state) => state.sellerauth.seller);
-    const {data: stats, error, isLoading} = useGetAdminStatsQuery();
+    const {data: stats, error, isLoading} = useGetAdminStatsQuery(seller?._id);
     if(isLoading) return <div>Loading...</div>
     if(!stats) return <div>No stats found</div>
     if(error) return <div>Failed to load stats!</div>
@@ -14,7 +14,7 @@ const AdminDMain = () => {
   return (
     <div className='p-6'>
         <div>
-            <h1 className='text-2xl font-semibold mb-4'>Admin Dashboard</h1>
+            <h1 className='text-2xl font-semibold mb-4'>Seller Dashboard</h1>
             <p className='text-gray-500'>Hi, {seller?.username}! Welcome to the Seller dashboard.</p>
             
             <AdminStats stats={stats}/>
