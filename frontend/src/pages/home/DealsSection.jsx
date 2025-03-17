@@ -1,5 +1,5 @@
 import React, { useState, useEffect }  from 'react'
-import dealsImg from "../../assets/full-trolley.jpeg"
+import dealsImg from "../../assets/full-trolley.png"
 const DealsSection = () => {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -36,14 +36,15 @@ const DealsSection = () => {
     }, []);
   
   return (
+     
     <section className='section__container deals__container'>
-      <div className='deals__image'>
-        <img src={dealsImg} alt="" />
+    <div className='deals__image'>
+        <img src={dealsImg} alt="" className='size-65' />
       </div>
       <div className='deals__content'>
         <h5>Get Up To 20% Discount</h5>
         <h4>Deals Of This Month</h4>
-        <p>"Exciting news for all! Our 2025 Grocery Deals are here to fuel your shopping spree without breaking the bank. Explore a handpicked collection of fresh produce, snacks, and essentials, all designed to keep your kitchen stocked and your meals on point!</p>
+        <p>Exciting news for all! Our 2025 Grocery Deals are here to fuel your shopping spree without breaking the bank. Explore a handpicked collection of fresh produce, snacks, and essentials, all designed to keep your kitchen stocked and your meals on point!</p>
 
         <div className='deals__countdown flex-wrap'>
             <div className='deals__countdown__card'>
