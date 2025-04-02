@@ -16,8 +16,10 @@ A fast and efficient grocery store web application built using Vite, React, and 
 - **State Management**:  Redux
 - **Authentication**: JWT-based authentication
 - **Deployment**: Vercel for frontend, Render for backend
-- ** Deployment-Links:https://gc-frontend-hazel.vercel.app/
-- ** for backend:https://gc-backend-zyr3.onrender.com/
+- ** Deployment-Links: https://gc-frontend-hazel.vercel.app/
+- ** for backend: https://gc-backend-zyr3.onrender.com/
+- ** for Frontend Git Repository : https://github.com/VijaySaiBorru/gc-frontend
+- ** for Backend Git Repository : https://github.com/VijaySaiBorru/gc-backend
 
 ## Installation
 ### Prerequisites
